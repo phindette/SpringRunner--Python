@@ -8,6 +8,7 @@ class Personnage:
         self.positiony = positiony
         self.position = (positionx,positiony)
 
+
     def setpositionx(self,positionx):
         self.positionx = positionx
         self.position = (self.positionx,self.positiony)
