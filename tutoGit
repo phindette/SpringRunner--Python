@@ -1,0 +1,30 @@
+TUTO Git :
+
+1 - Créer un répertoire
+
+2 - Dans le shell
+
+2_1 - git init
+2_2 - git remote add origin https://github.com/phindette/Actipognon
+2_3 - git fetch
+2_4 - git merge FETCH_HEAD
+
+3 - vous pouvez normalement pull et push tranquillement.
+
+
+Sur Atom -
+
+1 - cliquer sur Git en bas à droite
+
+2 - mettre tout fichier que l'on souhaite push dans "Staged Changes"
+
+3 - ecrire un commit message
+
+4 - cliquer sur commit to master
+
+
+Plusieurs choses toujours flou :
+
+Est-ce qu'il commit automatiquement ou faut t'il le faire grâce à la console ?
+
+Autres choses pas encore rencontré qui peuvent nous saouler.. 
