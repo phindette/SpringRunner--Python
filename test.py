@@ -27,7 +27,7 @@ pygame.init()
 fenetre = pygame.display.set_mode((LARGEURFENETRE, HAUTEURFENETRE))
 
 #Chargement et collage du fond
-fond = pygame.image.load("background.JPG").convert()
+fond = pygame.image.load("background.jpg").convert()
 fenetre.blit(fond, (0,0))
 
 #Chargement et collage du personnage
