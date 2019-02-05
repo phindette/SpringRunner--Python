@@ -1,30 +1,11 @@
 import pygame
 
-class Plateform:
-
-    def __init__(self,positionx,positiony):
-        self.positionx = positionx
-        self.positiony = positiony
-        self.position = (positionx,positiony)
-
-    def setEtat(self):
-        self.Etat="neutre"
-        self.Etat="bonus"
-        self.Etat="gravite"
-
-    def setpositionx(self,positionx):
-        self.positionx = positionx
-        self.position = (self.positionx,self.positiony)
-
-    def setpositiony(self,positiony):
-        self.positiony = positiony
-        self.position(self.positionx,self.positiony)
-
-    def setposition(self,position):
-        self.position = position
-
-    def getpositionx(self):
-        return self.positionx
-
-    def getpositiony(self):
-        return self.positiony
+class Plateform(pygame.sprite.Sprite):
+    def __init__(self, x, y, w, h):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface((w, h))
+        #pygame.image.load("bloc.png").convert()
+        self.image = pygame.image.load("bloc.png").convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
