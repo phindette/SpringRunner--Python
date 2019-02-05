@@ -23,6 +23,11 @@ class Perso(pygame.sprite.Sprite):
 
     def jump(self):
         self.rect.y +=2
+        hits = pygame.sprite.spritecollide(self,self.game.plateformes,False)
+        self.rect.y -=2
+        if hits and not self.sauter:
+            self.sauter = True
+            self.vel.y =-20
 
     '''def deplacer(self, dir):
         if dir == DROITE:
@@ -31,14 +36,14 @@ class Perso(pygame.sprite.Sprite):
         if dir == GAUCHE:
             for i in range(1,VITESSE):
                 self.rect.x -=1'''
-                
+
     def update(self):
         self.acc = vec(0,0.8)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_q]:
-            self.acc.x = -20
+            self.acc.x = -1
         if keys[pygame.K_d]:
-            self.acc.x = 20
+            self.acc.x = 1
         # apply friction
         self.acc.x += self.vel.x * -0.12
         # equations of motion

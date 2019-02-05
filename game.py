@@ -49,7 +49,7 @@ class Game:
                     if self.joueur.pos.y < lowest.rect.centery :
                         self.joueur.pos.y = lowest.rect.top
                         self.joueur.vel.y = 0
-                        self.joueur.jumping = False
+                        self.joueur.sauter = False
 
     def events(self):
         #évennements de la boucle du jeu
