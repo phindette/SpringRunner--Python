@@ -12,8 +12,8 @@ class Perso(pygame.sprite.Sprite):
         self.charger_images()
         self.image =self.debout
         self.rect = self.image.get_rect()
-        self.rect.center = (40,HAUTEURFENETRE - (HAUTEURFENETRE - 100))
-        self.pos = vec(40,HAUTEURFENETRE - (HAUTEURFENETRE - 100))
+        self.rect.center = (0, HAUTEURFENETRE - 60)
+        self.pos = vec(0, HAUTEURFENETRE - 60)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
@@ -28,14 +28,6 @@ class Perso(pygame.sprite.Sprite):
         if hits and not self.sauter:
             self.sauter = True
             self.vel.y =-20
-
-    '''def deplacer(self, dir):
-        if dir == DROITE:
-            for i in range(1,VITESSE):
-                self.rect.x +=1
-        if dir == GAUCHE:
-            for i in range(1,VITESSE):
-                self.rect.x -=1'''
 
     def update(self):
         self.acc = vec(0,0.8)
