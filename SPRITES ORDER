@@ -1,0 +1,9 @@
+chara walking :
+
+chara -> chara walking 1 -> chara walking 2 -> chara walking 1 ->
+chara -> chara walking 3 -> chara walking 4 -> chara walking 3 ->
+chara -> ...
+
+antigrave chara aura :
+
+aura 1 -> aura 2 -> aura 3 -> aura 2 -> aura 1 -> ...
