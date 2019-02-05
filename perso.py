@@ -5,11 +5,10 @@ vec = pygame.math.Vector2
 class Perso(pygame.sprite.Sprite):
     def __init__(self,game):
         self.groupes = game.les_sprites
-        pygame.sprite.Sprite.__init__(self,self.groupes)
+        pygame.sprite.Sprite.__init__(self,game.les_sprites)
         self.game = game
         self.marcher = False
         self.sauter = False
-        self.mort = False
         self.charger_images()
         self.image =self.debout
         self.rect = self.image.get_rect()
@@ -17,7 +16,7 @@ class Perso(pygame.sprite.Sprite):
         self.pos = vec(0, HAUTEURFENETRE - 60)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
-
+        self.check = None
     def charger_images(self):
         #charger les images (pour l'instant que l'image de base)
         self.debout = pygame.image.load("chara.png").convert_alpha()
@@ -29,12 +28,11 @@ class Perso(pygame.sprite.Sprite):
         if hits and not self.sauter:
             self.sauter = True
             self.vel.y =-20
-    def respawn(self,pointDeRespawn):
-        self.pos.x = pointDeRespawn.rect.x
-        self.pos.y = pointDeRespawn.rect.y
 
-<<<<<<< HEAD
-        self.rect.midbottom = self.pos
+    def respawn(self,c):
+        self.pos.x = c.rect.x
+        self.pos.y = c.rect.y
+
     '''def deplacer(self, dir):
         if dir == DROITE:
             for i in range(1,VITESSE):
@@ -43,8 +41,6 @@ class Perso(pygame.sprite.Sprite):
             for i in range(1,VITESSE):
                 self.rect.x -=1'''
 
-=======
->>>>>>> c3f3e7a95ff8547de7722d9cff43830ca7de3af4
     def update(self):
         self.acc = vec(0,0.8)
         keys = pygame.key.get_pressed()

@@ -5,6 +5,8 @@ from constantes import *
 import personnage
 import perso
 import plat
+import piege
+import checkpoint
 
 class Game:
     def __init__(self):
@@ -20,11 +22,20 @@ class Game:
         self.les_sprites = pygame.sprite.LayeredUpdates()
         self.plateformes = pygame.sprite.Group()
         self.pieges = pygame.sprite.Group()
-        self.checkpoints = pygame.sprite.Group()
+        self.check = pygame.sprite.Group()
         self.joueur = perso.Perso(self)
+
         for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
             plat.Plat(self,*plate)
 
+        for piegee in [(0, HAUTEURFENETRE - 300)]:
+            piege.Piege(self,*piegee)
+
+        for checkk in [(200, HAUTEURFENETRE - 300),(50, HAUTEURFENETRE - 150)]:
+            checkpoint.Check(self,*checkk)
+
+        liste = self.check.sprites()
+        self.checkpointCourant = liste[0]
 
         self.start()
 
@@ -65,7 +76,15 @@ class Game:
                 if plat.rect.right >= LARGEURFENETRE:
                     plat.kill()
 
+        #Verif que le joueur est sur un pic
+        hitMortel = pygame.sprite.spritecollide(self.joueur,self.pieges,False)
+        if hitMortel:
+            self.joueur.respawn(self.checkpointCourant)
 
+        #Verif que le joueur a activé un checkpoint
+        hitCheck = pygame.sprite.spritecollide(self.joueur,self.check,False)
+        if hitCheck:
+            self.checkpointCourant = pygame.sprite.spritecollideany(self.joueur,self.check)
 
 
     def events(self):
