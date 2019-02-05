@@ -13,8 +13,8 @@ class Perso(pygame.sprite.Sprite):
         self.charger_images()
         self.image =self.debout
         self.rect = self.image.get_rect()
-        self.rect.center = (40,HAUTEURFENETRE - (HAUTEURFENETRE - 100))
-        self.pos = vec(40,HAUTEURFENETRE - (HAUTEURFENETRE - 100))
+        self.rect.center = (0, HAUTEURFENETRE - 60)
+        self.pos = vec(0, HAUTEURFENETRE - 60)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
@@ -33,6 +33,7 @@ class Perso(pygame.sprite.Sprite):
         self.pos.x = pointDeRespawn.rect.x
         self.pos.y = pointDeRespawn.rect.y
 
+<<<<<<< HEAD
         self.rect.midbottom = self.pos
     '''def deplacer(self, dir):
         if dir == DROITE:
@@ -42,6 +43,8 @@ class Perso(pygame.sprite.Sprite):
             for i in range(1,VITESSE):
                 self.rect.x -=1'''
 
+=======
+>>>>>>> c3f3e7a95ff8547de7722d9cff43830ca7de3af4
     def update(self):
         self.acc = vec(0,0.8)
         keys = pygame.key.get_pressed()

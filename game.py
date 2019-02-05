@@ -22,8 +22,7 @@ class Game:
         self.pieges = pygame.sprite.Group()
         self.checkpoints = pygame.sprite.Group()
         self.joueur = perso.Perso(self)
-
-        for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 - 50, HAUTEURFENETRE * 3 / 4 - 50),(125, HAUTEURFENETRE - 350),(350, 200),(175, 100)]:
+        for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
             plat.Plat(self,*plate)
 
 
@@ -46,6 +45,7 @@ class Game:
         #Mise à jour de la boucle du jeu
         self.les_sprites.update()
 
+        #Vérifie que le joueur est sur une plateforme (quand il tombe)
         if self.joueur.vel.y > 0:
             hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)
             if hits:
@@ -58,6 +58,14 @@ class Game:
                         self.joueur.pos.y = lowest.rect.top
                         self.joueur.vel.y = 0
                         self.joueur.sauter = False
+        #test:
+        if self.joueur.rect.right >= LARGEURFENETRE /2:
+            for plat in self.plateformes:
+                plat.rect.x -= max(abs(self.joueur.vel.x), 2)
+                if plat.rect.right >= LARGEURFENETRE:
+                    plat.kill()
+
+
 
 
     def events(self):
