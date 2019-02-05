@@ -3,6 +3,7 @@ import personnage
 import controleur
 import point
 from constantes import *
+from plateform import *
 
 
 contro = controleur.Controleur()
@@ -34,9 +35,17 @@ imagePerso = pygame.image.load("mon_image.jpg").convert_alpha()
 fenetre.blit(imagePerso, (perso.getpositionx(),perso.getpositiony()))
 
 #Chargement et collage des plateformes
-liste_posit = ((190,464),(415,360),(650,464),(190,264),(650,264))
-plateforme = pygame.image.load("bloc.png").convert()
-plateforme.set_colorkey((255,255,255))
+#liste_posit = ((190,464),(415,360),(650,464),(190,264),(650,264))
+#plateforme = pygame.image.load("bloc.png").convert()
+#plateforme.set_colorkey((255,255,255))
+plateformes = pygame.sprite.Group()
+p1 = Plateform(500, 10,0,0)
+print("connard :",p1.rect)
+print("connard2 :",p1.rect.y)
+print("connard3 :",p1.rect.w)
+print("connard4 :",p1.rect.h)
+#p1.image = pygame.image.load("bloc.png").convert_alpha()
+plateformes.add(p1)
 
 
 #Rafraîchissement de l'écran
@@ -57,8 +66,9 @@ while continuer:
     #Re-collage
     fenetre.blit(fond, (0,0))
     fenetre.blit(fond, (0,0))
-    for i in range(5):
-        fenetre.blit(plateforme ,liste_posit[i])
+    #for i in range(5):
+    #    fenetre.blit(plateforme ,liste_posit[i])
+    fenetre.blit(p1.image, (p1.rect.x, p1.rect.y))
     fenetre.blit(imagePerso, (perso.getpositionx(),perso.getpositiony()))
     #Rafraichissement
     pygame.display.flip()
