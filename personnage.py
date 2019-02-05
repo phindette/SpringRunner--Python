@@ -2,24 +2,18 @@ import pygame
 from constantes import *
 import point
 
-class Personnage:
+class Personnage(pygame.sprite.Sprite):
 
     def __init__(self,positionx,positiony):
         self.positionx = positionx
         self.positiony = positiony
-        self.position = (positionx,positiony)
-
+        self.hitbox = pygame.Rect(positionx,positiony,PERSOLARGEUR,PERSOHAUTEUR)
 
     def setpositionx(self,positionx):
         self.positionx = positionx
-        self.position = (self.positionx,self.positiony)
 
     def setpositiony(self,positiony):
         self.positiony = positiony
-        self.position(self.positionx,self.positiony)
-
-    def setposition(self,position):
-        self.position = position
 
     def getpositionx(self):
         return self.positionx
@@ -30,16 +24,39 @@ class Personnage:
     def getposition(self):
         print("je suis en x :",self.positionx,"et je suis en y :",self.positiony)
 
-    def deplacer(self, dir,listePixelSolide):
-        if dir == DROITE:
-            for i in range(1,VITESSE):
-                if not (self.positionx+1,self.positiony) in listePixelSolide:
-                    self.setpositionx(self.positionx + 1)
-                else:
-                    print("tamer")
-        if dir == GAUCHE:
-            for i in range(1,VITESSE):
-                if not (self.positionx,self.positiony) in listePixelSolide:
-                    self.setpositionx(self.positionx + -1)
-                else:
-                    print("tamer")
+    def deplacer(self, dir,listePixelSolide,obstacles,plateformes):
+        if self.hitbox.collidelist(listePixelSolide) == -1 and self.hitbox.collidelist(obstacles) == -1:
+            if dir == DROITE:
+                for i in range(1,VITESSE):
+                    if self.hitbox.collidelist(listePixelSolide) == -1 and self.hitbox.collidelist(obstacles) == -1:
+                        if self.hitbox.collidelist(plateformes) != -1:
+                            self.hitbox = pygame.Rect(self.positionx +1,self.positiony,PERSOLARGEUR,PERSOHAUTEUR)
+                            self.positionx +=1
+                        else:
+                            #IL TOMBE
+                            self.hitbox = pygame.Rect(self.positionx,self.positiony + 1,PERSOLARGEUR,PERSOHAUTEUR)
+                            self.positiony +=1
+                    else:
+                        self.hitbox = pygame.Rect(self.positionx -1,self.positiony,PERSOLARGEUR,PERSOHAUTEUR)
+                        self.positionx = self.positionx -1
+
+            if dir == GAUCHE:
+                for i in range(1,VITESSE):
+                    if self.hitbox.collidelist(listePixelSolide) == -1 and self.hitbox.collidelist(obstacles) == -1:
+                        if self.hitbox.collidelist(plateformes) != -1:
+                            self.hitbox = pygame.Rect(self.positionx -1,self.positiony,PERSOLARGEUR,PERSOHAUTEUR)
+                            self.positionx -=1
+                        else:
+                            #IL TOMBE
+                            self.hitbox = pygame.Rect(self.positionx,self.positiony + 1,PERSOLARGEUR,PERSOHAUTEUR)
+                            self.positiony +=1
+                    else:
+                        self.hitbox = pygame.Rect(self.positionx +1,self.positiony,PERSOLARGEUR,PERSOHAUTEUR)
+                        self.positionx +=1
+        else:
+            if(self.positionx == 0):
+                self.hitbox = pygame.Rect(self.positionx +1,self.positiony,PERSOLARGEUR,PERSOHAUTEUR)
+                self.positionx +=1
+            else:
+                self.hitbox = pygame.Rect(self.positionx -1,self.positiony,PERSOLARGEUR,PERSOHAUTEUR)
+                self.positionx = self.positionx -1
