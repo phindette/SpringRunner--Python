@@ -7,7 +7,6 @@ from constantes import *
 
 contro = controleur.Controleur()
 listePixelSolide = contro.getListePixel()
-contro.printPixel()
 x = 20
 y = 50
 position = (x,y)
@@ -30,7 +29,7 @@ fond = pygame.image.load("background.JPG").convert()
 fenetre.blit(fond, (0,0))
 
 #Chargement et collage du personnage
-imagePerso = pygame.image.load("mon_image.jpg").convert_alpha()
+imagePerso = pygame.image.load("chara.png").convert_alpha()
 fenetre.blit(imagePerso, (perso.getpositionx(),perso.getpositiony()))
 
 #Chargement et collage des plateformes
