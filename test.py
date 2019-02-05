@@ -1,7 +1,13 @@
 import pygame
 import personnage
+import controleur
+import point
 from constantes import *
 
+
+contro = controleur.Controleur()
+listePixelSolide = contro.getListePixel()
+contro.printPixel()
 x = 20
 y = 50
 position = (x,y)
@@ -9,7 +15,7 @@ position = (x,y)
 perso = personnage.Personnage(x,y)
 perso.getposition()
 print("salut")
-perso.deplacer(GAUCHE)
+perso.deplacer(GAUCHE,listePixelSolide)
 perso.getposition()
 print("fin du game")
 
@@ -17,7 +23,7 @@ print("fin du game")
 pygame.init()
 
 #Ouverture de la fenêtre Pygame
-fenetre = pygame.display.set_mode((900, 900))
+fenetre = pygame.display.set_mode((LARGEURFENETRE, HAUTEURFENETRE))
 
 #Chargement et collage du fond
 fond = pygame.image.load("background.JPG").convert()
@@ -43,9 +49,9 @@ while continuer:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_d:
-                perso.deplacer(DROITE)
+                perso.deplacer(DROITE,listePixelSolide)
             elif event.key == pygame.K_q:
-                perso.deplacer(GAUCHE)
+                perso.deplacer(GAUCHE,listePixelSolide)
         if event.type == pygame.QUIT:
             continuer = False
     #Re-collage

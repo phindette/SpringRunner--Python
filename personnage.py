@@ -1,5 +1,6 @@
 import pygame
 from constantes import *
+import point
 
 class Personnage:
 
@@ -29,8 +30,16 @@ class Personnage:
     def getposition(self):
         print("je suis en x :",self.positionx,"et je suis en y :",self.positiony)
 
-    def deplacer(self, dir):
+    def deplacer(self, dir,listePixelSolide):
         if dir == DROITE:
-            self.setpositionx(self.positionx + VITESSE)
+            for i in range(1,VITESSE):
+                if not (self.positionx+1,self.positiony) in listePixelSolide:
+                    self.setpositionx(self.positionx + 1)
+                else:
+                    print("tamer")
         if dir == GAUCHE:
-            self.setpositionx(self.positionx - VITESSE)
+            for i in range(1,VITESSE):
+                if not (self.positionx,self.positiony) in listePixelSolide:
+                    self.setpositionx(self.positionx + -1)
+                else:
+                    print("tamer")
