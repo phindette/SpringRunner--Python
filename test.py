@@ -2,10 +2,11 @@ import pygame
 import personnage
 import controleur
 import point
+import gravity
 from constantes import *
 from plateform import *
 
-
+gravity = gravity.Gravity()
 contro = controleur.Controleur()
 listePixelSolide = contro.getListePixel()
 x = 20
@@ -53,9 +54,11 @@ pygame.display.flip()
 #BOUCLE INFINIE
 continuer = True
 pygame.key.set_repeat(1,20)
+x = 0
 while continuer:
     pygame.time.Clock().tick(60)
-    perso.setpositiony (perso.getpositiony() +1)
+    x +=0.1 
+    gravity.graviteBase(perso,x)
     for event in pygame.event.get():
 
         if event.type == pygame.KEYDOWN:
