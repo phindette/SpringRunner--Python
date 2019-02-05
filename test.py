@@ -15,7 +15,7 @@ position = (x,y)
 perso = personnage.Personnage(x,y)
 perso.getposition()
 print("salut")
-perso.deplacer(GAUCHE,listePixelSolide)
+perso.deplacer(GAUCHE,listePixelSolide,listePixelSolide)
 perso.getposition()
 print("fin du game")
 
@@ -37,14 +37,14 @@ fenetre.blit(imagePerso, (perso.getpositionx(),perso.getpositiony()))
 #liste_posit = ((190,464),(415,360),(650,464),(190,264),(650,264))
 #plateforme = pygame.image.load("bloc.png").convert()
 #plateforme.set_colorkey((255,255,255))
-plateformes = pygame.sprite.Group()
+plateformes = []
 p1 = Plateform(500, 10,0,0)
 print("connard :",p1.rect)
 print("connard2 :",p1.rect.y)
 print("connard3 :",p1.rect.w)
 print("connard4 :",p1.rect.h)
 #p1.image = pygame.image.load("bloc.png").convert_alpha()
-plateformes.add(p1)
+plateformes.append(p1)
 
 
 #Rafraîchissement de l'écran
@@ -60,9 +60,9 @@ while continuer:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_d:
-                perso.deplacer(DROITE,listePixelSolide)
+                perso.deplacer(DROITE,listePixelSolide,plateformes)
             elif event.key == pygame.K_q:
-                perso.deplacer(GAUCHE,listePixelSolide)
+                perso.deplacer(GAUCHE,listePixelSolide,plateformes)
         if event.type == pygame.QUIT:
             continuer = False
     #Re-collage
