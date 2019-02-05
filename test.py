@@ -54,7 +54,10 @@ pygame.display.flip()
 continuer = True
 pygame.key.set_repeat(1,20)
 while continuer:
+    pygame.time.Clock().tick(60)
+    perso.setpositiony (perso.getpositiony() +1)
     for event in pygame.event.get():
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_d:
                 perso.deplacer(DROITE,listePixelSolide)
