@@ -66,9 +66,11 @@ class Personnage(pygame.sprite.Sprite):
 
 
 
-        # def mourirEtRespawn(self,listePiege,checkpointCourant):
-        #     if self.hitbox.collidelist(listePiege) != -1:
-        #         print("issou")
-        #         self.hitbox = pygame.Rect(checkpointCourant.rect.x,checkpointCourant.rect.y,PERSOLARGEUR,PERSOHAUTEUR)
-        #         self.positonx = checkpointCourant.rect.x;
-        #         self.positiony = checkpointCourant.rect.y;
+    def mourirEtRespawn(self,listePiege,checkpointCourant) :
+        if self.hitbox.collidelist(listePiege) != -1:
+             print("issou")
+             print(checkpointCourant.rect.x)
+             print(checkpointCourant.rect.y)
+             self.positonx = checkpointCourant.rect.x;
+             self.positiony = checkpointCourant.rect.y;
+             self.hitbox = pygame.Rect(self.positionx,self.positiony,PERSOLARGEUR,PERSOHAUTEUR)

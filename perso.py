@@ -9,6 +9,7 @@ class Perso(pygame.sprite.Sprite):
         self.game = game
         self.marcher = False
         self.sauter = False
+        self.mort = False
         self.charger_images()
         self.image =self.debout
         self.rect = self.image.get_rect()
@@ -28,7 +29,11 @@ class Perso(pygame.sprite.Sprite):
         if hits and not self.sauter:
             self.sauter = True
             self.vel.y =-20
+    def respawn(self,pointDeRespawn):
+        self.pos.x = pointDeRespawn.rect.x
+        self.pos.y = pointDeRespawn.rect.y
 
+        self.rect.midbottom = self.pos
     '''def deplacer(self, dir):
         if dir == DROITE:
             for i in range(1,VITESSE):

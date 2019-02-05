@@ -19,10 +19,18 @@ class Game:
         #Débute une nouvelle nouvellePartie
         self.les_sprites = pygame.sprite.LayeredUpdates()
         self.plateformes = pygame.sprite.Group()
+        self.pieges = pygame.sprite.Group()
+        self.checkpoints = pygame.sprite.Group()
         self.joueur = perso.Perso(self)
+
         for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 - 50, HAUTEURFENETRE * 3 / 4 - 50),(125, HAUTEURFENETRE - 350),(350, 200),(175, 100)]:
             plat.Plat(self,*plate)
+
+
         self.start()
+
+
+
 
     def start(self):
         #Boucle du jeu
@@ -50,6 +58,7 @@ class Game:
                         self.joueur.pos.y = lowest.rect.top
                         self.joueur.vel.y = 0
                         self.joueur.sauter = False
+
 
     def events(self):
         #évennements de la boucle du jeu
