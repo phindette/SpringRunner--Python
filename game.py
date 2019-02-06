@@ -58,7 +58,6 @@ class Game:
 
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
         hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)
-
         if hits:
             platBas = hits[0]
             platDroit = hits[0]
@@ -85,6 +84,7 @@ class Game:
                         self.joueur.pos.y = plat.rect.top #positionne le joueur sur la plateforme
                         self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
                         self.joueur.sauter = False #le joueur n'est plus en train de sauter
+
                     #Si le joueur est à gauche de la plateforme
                     if self.joueur.pos.x < plat.rect.left +20 and self.joueur.pos.y > plat.rect.top:
                         print("tamer")
@@ -92,6 +92,8 @@ class Game:
                         self.joueur.acc.x = 0
                         self.joueur.vel.x = 0
                         self.joueur.sauter = False
+                        if self.joueur.gravite:
+                            self.joueur.changeM = True
                     #Si le joueur est à droite de la plateforme
                     if self.joueur.pos.x > plat.rect.right -20 and self.joueur.pos.y > plat.rect.top:
                         print("tamer2")
@@ -99,12 +101,15 @@ class Game:
                         self.joueur.acc.x = 0
                         self.joueur.vel.x = 0
                         self.joueur.sauter = False
+                        if self.joueur.gravite:
+                            self.joueur.changeM = True
                     #Si le joueur est en dessous de la plateformes
                     if self.joueur.pos.y > plat.rect.bottom -10:
                         self.joueur.pos.y = plat.rect.bottom +75
                         self.joueur.acc.y = 0
                         self.joueur.vel.y = 0
                         self.joueur.sauter =False
+                        
                 #Vérification si le joueur est au contacte de deux plateformes
                 if platBas != platDroit or platBas != platGauche:
                     #colision a droite :
