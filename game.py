@@ -55,6 +55,33 @@ class Game:
         #Mise à jour de la boucle du jeu
         self.les_sprites.update()
 
+        #MISE EN PLACE DU TIMER
+        ingametimer = round(((pygame.time.get_ticks()-0)/1000))
+        minutes = 0
+        if ingametimer >= 180 :
+            minutes = 3
+            ingametimer -= 180
+        elif ingametimer >= 120 :
+            minutes = 2
+            ingametimer -= 120
+        elif ingametimer >= 60 :
+            minutes = 1
+            ingametimer -= 60
+
+        if ingametimer >= 10 :
+            self.seconds = '0' + str(minutes) + ':' +  str(ingametimer)
+        else :
+            self.seconds = '0' + str(minutes) + ':' +'0' +  str(ingametimer)
+        texte.Texte(self,self.seconds)
+
+        #MISE EN PLACE DU NOMBRE DE POINTS
+        pts = self.niveau
+        stringpts = "Points : " + str(self.niveau)
+        self.pts = texte.Texte(self,stringpts)
+        self.pts.rect.y = 60
+
+
+
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
         hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)
         if hits:
@@ -205,14 +232,14 @@ class Game:
         pygame.display.flip()
 
     def initNiveau(self,niveau):
-        print("TAGROSSEMERE4")
         self.les_sprites.empty()
         self.plateformes.empty()
         self.pieges.empty()
         self.check.empty()
         self.joueur = perso.Perso(self)
 
-        texte.Texte(self,"tamer")
+
+
         if niveau == 1:
             for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
                 plat.Plat(self,*plate)
