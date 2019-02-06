@@ -54,7 +54,6 @@ class Game:
     def update(self):
         #Mise à jour de la boucle du jeu
         self.les_sprites.update()
-
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
         hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)
         if hits:

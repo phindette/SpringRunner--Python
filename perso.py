@@ -13,9 +13,10 @@ class Perso(pygame.sprite.Sprite):
         self.sauter = False
         self.animation = "SR"
         self.index = 0
-        self.spritesCollection = initTabSprites(4).copy()
+        self.spritesCollection = initTabSprites(6).copy()
         self.spritesDebout = SpriteSheet("chara0.png")
         self.spritesMarche = SpriteSheet("chara_walking_right_spritesheet.png")
+        self.spritesSaut = SpriteSheet("chara_jumping.png")
         self.charger_images()
         self.image = self.spritesCollection[0][0]
         self.rect = self.image.get_rect()
@@ -33,6 +34,8 @@ class Perso(pygame.sprite.Sprite):
         loadSpritesInverted(self.spritesCollection[1],self.spritesDebout,1,35,60)
         loadSprites(self.spritesCollection[2],self.spritesMarche,8,35,60)
         loadSpritesInverted(self.spritesCollection[3],self.spritesMarche,8,35,60)
+        loadSprites(self.spritesCollection[4],self.spritesSaut,1,35,60)
+        loadSpritesInverted(self.spritesCollection[5],self.spritesSaut,1,35,60)
 
     def jump(self):
         self.rect.y +=2
@@ -41,6 +44,7 @@ class Perso(pygame.sprite.Sprite):
         if hits and not self.sauter:
             self.sauter = True
             self.vel.y =-20
+
 
     def respawn(self,c):
         self.pos.x = c.rect.x
@@ -55,6 +59,7 @@ class Perso(pygame.sprite.Sprite):
                 self.rect.x -=1'''
 
     def update(self):
+        print("actu")
         # self.acc = vec(0,0.8)
         # self.acc = vec(0,0.80)
         self.index += 1
@@ -74,8 +79,16 @@ class Perso(pygame.sprite.Sprite):
             if self.index >= len(self.spritesCollection[3]):
                 self.index=0
             self.image = self.spritesCollection[3][self.index]
+        elif self.animation == "JR":
+            if self.index >= len(self.spritesCollection[4]):
+                self.index=0
+            self.image = self.spritesCollection[4][self.index]
+        elif self.animation == "JL":
+            if self.index >= len(self.spritesCollection[5]):
+                self.index=0
+            self.image = self.spritesCollection[5][self.index]
 
-
+        print(self.vel.y)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
             self.gravite = True
@@ -93,15 +106,29 @@ class Perso(pygame.sprite.Sprite):
                 self.pos.y = self.pos.y +2
         else:
             if keys[pygame.K_q]:
-                self.acc.x = -1
-                self.animation = "L"
+                if self.vel.y < -0.0:
+                    self.acc.x = -1
+                    self.animation = "JL"
+                else:
+                    self.acc.x = -1
+                    self.animation = "L"
             elif keys[pygame.K_d]:
-                self.acc.x = 1
-                self.animation = "R"
+                if self.vel.y < -0.0:
+                    self.acc.x = 1
+                    self.animation = "JR"
+                else:
+                    self.acc.x = 1
+                    self.animation = "R"
+            elif self.vel.y < -0.0:
+                if self.animation == "R" or self.animation == "SR" or self.animation == "JR":
+                    self.animation = "JR"
+                elif self.animation == "L" or self.animation == "SL" or self.animation == "JL":
+                    self.animation = "JL"
+
             else:
-                if self.animation == "R":
+                if self.animation == "R" or self.animation == "SR" or self.animation == "JR":
                     self.animation = "SR"
-                elif self.animation == "L":
+                elif self.animation == "L" or self.animation == "SL" or self.animation == "JL":
                     self.animation = "SL"
 
         # apply friction
