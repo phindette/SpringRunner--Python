@@ -42,9 +42,15 @@ class Perso(pygame.sprite.Sprite):
                 self.rect.x -=1'''
 
     def update(self):
-        self.acc = vec(0,0.8)
-        self.acc = vec(0,0.80)
+        # self.acc = vec(0,0.8)
+        # self.acc = vec(0,0.80)
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_a]:
+            self.acc = vec(0,-0.80)
+            self.gravite = True
+            self.gravite = False
+        else :
+            self.acc = vec(0,0.80)
         if keys[pygame.K_q]:
             self.acc.x = -1
         if keys[pygame.K_d]:
