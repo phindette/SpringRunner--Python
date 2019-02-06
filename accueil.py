@@ -14,6 +14,7 @@ class Menu :
         # noms des menus et commandes associées
         items = (
             ('JOUER', application.jeu),
+            ('REGLES', application.regles),
             ('QUITTER', application.quitter)
         )
         x = 400
@@ -130,7 +131,7 @@ class Application :
     """ Classe maîtresse gérant les différentes interfaces du jeu """
     def __init__(self) :
         pygame.init()
-        pygame.display.set_caption("ISN ILIES")
+        pygame.display.set_caption("SpringRunner")
 
         self.fond = (150,)*3
 
@@ -156,6 +157,14 @@ class Application :
         # Affichage du jeu
         self._initialiser()
         self.ecran = Jeu(self, self.groupeGlobal)
+
+    def regles(self):
+        #Affichage des règles
+        self._initialiser()
+        pygame.init()
+        self.ecran = pygame.display.set_mode((surfaceW,surfaceH))
+        pygame.display.set_caption("Règles")
+        self.clock = pygame.time.Clock()
 
     def quitter(self) :
         self.statut = False
