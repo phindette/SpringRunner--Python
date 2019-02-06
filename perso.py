@@ -17,6 +17,8 @@ class Perso(pygame.sprite.Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.check = None
+        self.gravite = False
+        self.changeM = False
     def charger_images(self):
         #charger les images (pour l'instant que l'image de base)
         self.debout = pygame.image.load("chara.png").convert_alpha()
@@ -24,7 +26,7 @@ class Perso(pygame.sprite.Sprite):
     def jump(self):
         self.rect.y +=2
         hits = pygame.sprite.spritecollide(self,self.game.plateformes,False)
-        self.rect.y -=2
+        self.rect.y -=1
         if hits and not self.sauter:
             self.sauter = True
             self.vel.y =-20
@@ -42,12 +44,28 @@ class Perso(pygame.sprite.Sprite):
                 self.rect.x -=1'''
 
     def update(self):
-        self.acc = vec(0,0.8)
+        # self.acc = vec(0,0.8)
+        # self.acc = vec(0,0.80)
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_q]:
-            self.acc.x = -1
-        if keys[pygame.K_d]:
-            self.acc.x = 1
+        if keys[pygame.K_a]:
+            if self.gravite == False:
+                self.acc = vec(0,-0.80)
+                self.gravite = True
+            else:
+                self.gravite = False
+                # self.changeM = False
+        else :
+            self.acc = vec(0,0.80)
+        if self.changeM:
+            if keys[pygame.K_z]:
+                self.acc.y = -1
+            if keys[pygame.K_s]:
+                self.acc.y = 1
+        else:
+            if keys[pygame.K_q]:
+                self.acc.x = -1
+            if keys[pygame.K_d]:
+                self.acc.x = 1
         # apply friction
         self.acc.x += self.vel.x * -0.12
         # equations of motion
