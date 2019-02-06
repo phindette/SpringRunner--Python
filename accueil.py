@@ -2,8 +2,8 @@ import pygame
 from constantes import *
 import game
 
-surfaceW = 800 #Dimension de la fenêtre / Largeur
-surfaceH = 600 #Dimension de la fenêtre / Longueur
+surfaceW = LARGEURFENETRE #Dimension de la fenêtre / Largeur
+surfaceH = HAUTEURFENETRE #Dimension de la fenêtre / Longueur
 
 class Menu :
     """ Création et gestion des boutons d'un menu """
@@ -19,8 +19,8 @@ class Menu :
             ('REGLES', application.regles),
             ('QUITTER', application.quitter)
         )
-        x = 400
-        y = 200
+        x = surfaceW/2
+        y = surfaceH/2 -100
         self._boutons = []
         for texte, cmd in items :
             mb = MenuBouton(
@@ -147,13 +147,12 @@ class Regles :
         pygame.time.set_timer(self._CLIGNOTER, 80)
 
     def creerTexte(self) :
-        fichier = open("regles.txt", "r")
-        self._font = pygame.font.SysFont('Helvetica', 36, bold=True)
-        self.texte= self._font.render("""Bienvenue dans SpringRunner, le tout nouveau jeu de plateforme !
+        #fichier = open("regles.txt", "r")
+        self._font = pygame.font.SysFont('Helvetica', 10, bold=True)
+        self.texte= self._font.render("""Bienvenue dans SpringRunner, le tout nouveau jeu de plateforme !\n
         Le but du jeu est d'arriver le plus loin possible dans les différents niveaux en 3 minutes.
         Pour cela vous devez déplacer votre personnage de plateformes en plateformes en évitant les piques.
         Si vous mourrez, vous apparaissez à nouveau au dernier checkpoint.""", True, self._couleurTexte)
-
     def update(self, events) :
         self._fenetre.blit(self.texte, self.rectTexte)
         for event in events :
@@ -198,7 +197,9 @@ class Application :
         print("tamer")
         #self.ecran = Jeu(self, self.groupeGlobal)
         g = game.Game()
-        g.start()
+        while g.enCours:
+            g.nouvellePartie()
+        pygame.quit()
 
     def regles(self):
         #Affichage des règles

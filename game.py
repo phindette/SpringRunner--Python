@@ -105,7 +105,7 @@ class Game:
                         self.joueur.acc.y = 0
                         self.joueur.vel.y = 0
                         self.joueur.sauter =False
-                        
+
                 #Vérification si le joueur est au contacte de deux plateformes
                 if platBas != platDroit or platBas != platGauche:
                     #colision a droite :
@@ -233,9 +233,3 @@ class Game:
 
             for finniv in[(600,HAUTEURFENETRE - 50)]:
                 goal.Goal(self,*finniv)
-
-
-g = Game()
-while g.enCours:
-    g.nouvellePartie()
-pygame.quit()
