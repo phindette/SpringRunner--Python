@@ -1,5 +1,6 @@
 import pygame
 from constantes import *
+import game
 
 surfaceW = 800 #Dimension de la fenêtre / Largeur
 surfaceH = 600 #Dimension de la fenêtre / Longueur
@@ -131,12 +132,11 @@ class Jeu :
 class Regles :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
-        regles.fond = (0, 0, 0)
+        self.image=pygame.Surface((surfaceW, surfaceH))
+        self.image = pygame.image.load("background_menu.jpg").convert_alpha()
+        #regles.fond = (0, 0, 0)
 
-        from itertools import cycle
-        couleurs = [(0, 48, i) for i in range(0, 256, 15)]
-        couleurs.extend(sorted(couleurs[1:-1], reverse=True))
-        self._couleurTexte = cycle(couleurs)
+        self._couleurTexte = (227,128,75)
 
         self._font = pygame.font.SysFont('Helvetica', 36, bold=True)
         self.creerTexte()
@@ -147,11 +147,12 @@ class Regles :
         pygame.time.set_timer(self._CLIGNOTER, 80)
 
     def creerTexte(self) :
-        self.texte = self._font.render(
-            'LE JEU EST EN COURS D\'EXÉCUTION',
-            True,
-            next(self._couleurTexte)
-        )
+        fichier = open("regles.txt", "r")
+        self._font = pygame.font.SysFont('Helvetica', 36, bold=True)
+        self.texte= self._font.render("""Bienvenue dans SpringRunner, le tout nouveau jeu de plateforme !
+        Le but du jeu est d'arriver le plus loin possible dans les différents niveaux en 3 minutes.
+        Pour cela vous devez déplacer votre personnage de plateformes en plateformes en évitant les piques.
+        Si vous mourrez, vous apparaissez à nouveau au dernier checkpoint.""", True, self._couleurTexte)
 
     def update(self, events) :
         self._fenetre.blit(self.texte, self.rectTexte)
@@ -161,7 +162,7 @@ class Regles :
                 break
 
     def detruire(self) :
-        pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
+            pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
 
 
 
@@ -194,12 +195,15 @@ class Application :
     def jeu(self) :
         # Affichage du jeu
         self._initialiser()
-        self.ecran = Jeu(self, self.groupeGlobal)
+        print("tamer")
+        #self.ecran = Jeu(self, self.groupeGlobal)
+        g = game.Game()
+        g.start()
 
     def regles(self):
         #Affichage des règles
         self._initialiser()
-        self.ecran = Menu(self, self.groupeGlobal)
+        self.ecran = Regles(self, self.groupeGlobal)
         #pygame.init()
         #self.ecran = pygame.display.set_mode((surfaceW,surfaceH))
         #pygame.display.set_caption("Règles")
