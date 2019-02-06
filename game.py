@@ -14,25 +14,25 @@ class Game:
         pygame.init()
         self.screen = pygame.display.set_mode((LARGEURFENETRE,HAUTEURFENETRE))
         pygame.display.set_caption("JEU DE FOU")
-        self.clock = pygame.time.Clock() #je ne sais pas encore en quoi ça consiste vraiment.
+        self.clockniv1 = pygame.time.Clock() #je ne sais pas encore en quoi ça consiste vraiment.
         self.enCours = True;
 
     def nouvellePartie(self):
         #Débute une nouvelle nouvellePartie
+        self.joueur = perso.Perso(self)
         self.les_sprites = pygame.sprite.LayeredUpdates()
         self.plateformes = pygame.sprite.Group()
         self.pieges = pygame.sprite.Group()
         self.check = pygame.sprite.Group()
-        self.joueur = perso.Perso(self)
+        self.goals = pygame.sprite.Group()
 
-        for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
-            plat.Plat(self,*plate)
+        #MISE EN PLACE DES SPRITE POUR LE NIVEAU 1
+        self.niveau = 1
+        self.initNiveau(self.niveau)
 
-        for piegee in [(0, HAUTEURFENETRE - 300)]:
-            piege.Piege(self,*piegee)
-
-        for checkk in [(200, HAUTEURFENETRE - 300),(50, HAUTEURFENETRE - 150)]:
-            checkpoint.Check(self,*checkk)
+        #MISE EN PLACE DE LA GESTION NIVEAU
+        self.niveau = []
+        niveau.add(les_spritesniv1,les_spritesniv2)
 
         liste = self.check.sprites()
         self.checkpointCourant = liste[0]
@@ -182,6 +182,35 @@ class Game:
         self.screen.fill((255,255,255))
         self.les_sprites.draw(self.screen)
         pygame.display.flip()
+
+    def initNiveau(self,niveau):
+        self.les_sprites.empty()
+        self.plateformes.empty()
+        self.pieges.empty()
+        self.check.empty()
+
+        if niveau == 1:
+            for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
+                plat.Plat(self,*plate)
+
+            for piegee in [(0, HAUTEURFENETRE - 300)]:
+                plat.Plat(self,*plate)
+
+            for checkk in [(200, HAUTEURFENETRE - 300),(50, HAUTEURFENETRE - 150)]:
+                plat.Plat(self,*plate)
+
+            for finniv in[(200,HAUTEURFENETRE-600)]
+                goal.Goal(self,*finniv)
+
+        elif niveau == 2:
+            for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
+                plat.Plat(self,*plate)
+
+            for piegee in [(0, HAUTEURFENETRE - 300)]:
+                plat.Plat(self,*plate)
+
+            for checkk in [(200, HAUTEURFENETRE - 300),(50, HAUTEURFENETRE - 150)]:
+                plat.Plat(self,*plate)
 
 g = Game()
 while g.enCours:
