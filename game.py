@@ -8,6 +8,8 @@ import plat
 import piege
 import checkpoint
 import goal
+import texte
+
 
 class Game:
     def __init__(self):
@@ -22,6 +24,7 @@ class Game:
         #Débute une nouvelle nouvellePartie
         self.les_sprites = pygame.sprite.LayeredUpdates()
         self.plateformes = pygame.sprite.Group()
+        self.textes = pygame.sprite.Group()
         self.pieges = pygame.sprite.Group()
         self.check = pygame.sprite.Group()
         self.goals = pygame.sprite.Group()
@@ -202,12 +205,14 @@ class Game:
         pygame.display.flip()
 
     def initNiveau(self,niveau):
+        print("TAGROSSEMERE4")
         self.les_sprites.empty()
         self.plateformes.empty()
         self.pieges.empty()
         self.check.empty()
-
         self.joueur = perso.Perso(self)
+
+        texte.Texte(self,"tamer")
         if niveau == 1:
             for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
                 plat.Plat(self,*plate)
