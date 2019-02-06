@@ -101,6 +101,7 @@ class Game:
                         self.joueur.sauter = False
                     #Si le joueur est en dessous de la plateformes
                     if self.joueur.pos.y > plat.rect.bottom -10:
+                        self.joueur.pos.y = plat.rect.bottom +75
                         self.joueur.acc.y = 0
                         self.joueur.vel.y = 0
                         self.joueur.sauter =False
