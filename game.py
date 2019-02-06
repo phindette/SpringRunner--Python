@@ -57,13 +57,73 @@ class Game:
         self.les_sprites.update()
 
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
-        if self.joueur.vel.y > 0:
-            hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)
+        hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)
 
-            if hits:
-                lowest = hits[0]
-                for hit in hits:
-                    if hit.rect.left > lowest.rect.left:
+        if hits:
+            platBas = hits[0]
+            platDroit = hits[0]
+            platGauche = hits[0]
+            for hit in hits:
+                #print(hit.rect.bottom,"et ",)
+                if hit.rect.bottom >= platBas.rect.bottom:
+                    platBas = hit
+                if hit.rect.left >= platGauche.rect.left:
+                    platGauche = hit
+                if hit.rect.right >= platDroit.rect.right:
+                    platDroit = hit
+            #Vérification si le joueur est au contacte d'une plateforme
+            if self.joueur.pos.x < platBas.rect.right +10 and self.joueur.pos.x > platBas.rect.left -10:
+                #Si les 3 plat sont égales (colision avec une seule plateforme)
+                if platBas == platDroit and platBas == platGauche:
+                    #définition d'une plateforme générale
+                    plat = platBas
+                    #Si le joueur est au dessus de la plateforme
+                    if self.joueur.pos.y < plat.rect.top +20 :
+                        self.joueur.pos.y = plat.rect.top #positionne le joueur sur la plateforme
+                        self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
+                        self.joueur.sauter = False #le joueur n'est plus en train de sauter
+                    #Si le joueur est à gauche de la plateforme
+                    if self.joueur.pos.x < plat.rect.left +20 and self.joueur.pos.y > plat.rect.top:
+                        print("tamer")
+                        self.joueur.pos.x = plat.rect.left -10 #positionne le joueur contre la partie gauche de la plateforme
+                        self.joueur.acc.x = 0
+                        self.joueur.vel.x = 0
+                        self.joueur.sauter = False
+                    #Si le joueur est à droite de la plateforme
+                    if self.joueur.pos.x > plat.rect.right -20 and self.joueur.pos.y > plat.rect.top:
+                        print("tamer2")
+                        self.joueur.pos.x = plat.rect.right +10 #positionne le joueur contre la partie droite
+                        self.joueur.acc.x = 0
+                        self.joueur.sauter = False
+                #Vérification si le joueur est au contacte de deux plateformes
+                if platBas != platDroit or platBas != platGauche:
+                    #colision a droite :
+                    if platBas != platDroit:
+                        if self.joueur.pos.y < platBas.rect.top +20 :
+                            self.joueur.pos.y = platBas.rect.top #positionne le joueur sur la plateforme
+                            self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
+                            self.joueur.sauter = False #le joueur n'est plus en train de sauter
+                        if self.joueur.pos.x > platDroit.rect.right -20 and self.joueur.pos.y > plat.rect.top:
+                            print("tamer2")
+                            self.joueur.pos.x = platDroit.rect.right +10 #positionne le joueur contre la partie droite
+                            self.joueur.acc.x = 0
+                            self.joueur.sauter = False
+                    #colision a gauche:
+                    if platBas != platGauche:
+                        if self.joueur.pos.y < platBas.rect.top +20 :
+                            self.joueur.pos.y = platBas.rect.top #positionne le joueur sur la plateforme
+                            self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
+                            self.joueur.sauter = False #le joueur n'est plus en train de sauter
+                        if self.joueur.pos.x < platGauche.rect.left +20 and self.joueur.pos.y > platGauche.rect.top:
+                            print("tamer")
+                            self.joueur.pos.x = self.joueur.pos.x - 20 #positionne le joueur contre la partie gauche de la plateforme
+                            self.joueur.acc.x = 0
+                            self.joueur.vel.x = 0
+                            self.joueur.sauter = False
+
+
+
+                    '''if hit.rect.left > lowest.rect.left:
                         lowest = hit
                     if hit.rect.bottom > lowest.rect.bottom:
                         lowest = hit
@@ -81,7 +141,7 @@ class Game:
                         self.joueur.acc.y = 0
                         self.joueur.sauter = False
                         self.update()
-                        print("collision")
+                        print("collision")'''
 
         #test:
         if self.joueur.rect.right >= LARGEURFENETRE /2:
