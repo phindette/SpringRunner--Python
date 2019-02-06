@@ -2,6 +2,8 @@ import pygame
 from constantes import *
 import game
 import inputbox
+import highscores
+import texte
 
 surfaceW = LARGEURFENETRE #Dimension de la fenêtre / Largeur
 surfaceH = HAUTEURFENETRE #Dimension de la fenêtre / Longueur
@@ -9,8 +11,9 @@ surfaceH = HAUTEURFENETRE #Dimension de la fenêtre / Longueur
 class Fin :
     """ Création et gestion des boutons d'un menu """
     def __init__(self, application, *groupes) :
+        self.highscores = highscores.Highscores()
         self.pseudo = ''
-        self.score = 10
+        self.score = 11
         self.couleurs = dict(
             normal=(0, 200, 0),
             survol=(0, 200, 200),
@@ -62,6 +65,9 @@ class Fin :
         mb = MenuChampsPts(str(self.score),self.couleurs['normal'],font,x,y-(120*4),400,50)
         for groupe in groupes :
             groupe.add(mb)
+        #Ajout du joueur dans le classement.
+        self.highscores.addHighscore(self.score,self.pseudo)
+        self.highscores.displayHighscores()
     def update(self, events) :
         clicGauche, *_ = pygame.mouse.get_pressed()
         posPointeur = pygame.mouse.get_pos()
@@ -171,19 +177,9 @@ class Jeu :
 class Regles :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
-        self.image=pygame.Surface((surfaceW, surfaceH))
-        self.image = pygame.image.load("background_menu.jpg").convert_alpha()
-        #regles.fond = (0, 0, 0)
 
-        self._couleurTexte = (227,128,75)
-
-        self._font = pygame.font.SysFont('Helvetica', 36, bold=True)
-        self.creerTexte()
-        self.rectTexte = self.texte.get_rect()
-        self.rectTexte.center = (surfaceW/2, surfaceH/2)
-        # Création d'un event
-        self._CLIGNOTER = pygame.USEREVENT + 1
-        pygame.time.set_timer(self._CLIGNOTER, 80)
+        #Ma version :
+        self.titre = texte.Texte(regles,"test :")
 
     def creerTexte(self) :
         #fichier = open("regles.txt", "r")
@@ -193,11 +189,11 @@ class Regles :
         Pour cela vous devez déplacer votre personnage de plateformes en plateformes en évitant les piques.
         Si vous mourrez, vous apparaissez à nouveau au dernier checkpoint.""", True, self._couleurTexte)
     def update(self, events) :
-        self._fenetre.blit(self.texte, self.rectTexte)
-        for event in events :
+        self._fenetre.blit(self.titre.textSurf, self.titre.rect)
+        '''for event in events :
             if event.type == self._CLIGNOTER :
                 self.creerTexte()
-                break
+                break'''
 
     def detruire(self) :
             pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
@@ -209,32 +205,32 @@ class Application :
     def __init__(self) :
         pygame.init()
         pygame.display.set_caption("SpringRunner")
-
         self.fond = (COULEURMENU)
 
         self.fenetre = pygame.display.set_mode((surfaceW,surfaceH))
         # Groupe de sprites utilisé pour l'affichage
-        self.groupeGlobal = pygame.sprite.Group()
+        self.les_sprites = pygame.sprite.Group()
+        self.textes = pygame.sprite.Group()
         self.statut = True
 
     def _initialiser(self) :
         try:
             self.ecran.detruire()
             # Suppression de tous les sprites du groupe
-            self.groupeGlobal.empty()
+            self.les_sprites.empty()
         except AttributeError:
             pass
 
     def menu(self) :
         # Affichage du menu
         self._initialiser()
-        self.ecran = Fin(self, self.groupeGlobal)
+        self.ecran = Fin(self, self.les_sprites)
 
     def jeu(self) :
         # Affichage du jeu
         self._initialiser()
         print("tamer")
-        #self.ecran = Jeu(self, self.groupeGlobal)
+        #self.ecran = Jeu(self, self.les_sprites)
         g = game.Game()
         while g.enCours:
             g.nouvellePartie()
@@ -243,7 +239,7 @@ class Application :
     def regles(self):
         #Affichage des règles
         self._initialiser()
-        self.ecran = Regles(self, self.groupeGlobal)
+        self.ecran = Regles(self, self.les_sprites)
         #pygame.init()
         #self.ecran = pygame.display.set_mode((surfaceW,surfaceH))
         #pygame.display.set_caption("Règles")
@@ -262,8 +258,8 @@ class Application :
 
         self.fenetre.fill(self.fond)
         self.ecran.update(events)
-        self.groupeGlobal.update()
-        self.groupeGlobal.draw(self.fenetre)
+        self.les_sprites.update()
+        self.les_sprites.draw(self.fenetre)
         pygame.display.update()
 
 
