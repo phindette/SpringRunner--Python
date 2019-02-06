@@ -1,4 +1,5 @@
 import pygame
+from constantes import *
 
 surfaceW = 800 #Dimension de la fenêtre / Largeur
 surfaceH = 600 #Dimension de la fenêtre / Longueur
@@ -71,7 +72,8 @@ class MenuBouton(pygame.sprite.Sprite) :
         self._commande = commande
 
         self.image = pygame.Surface((largeur, hauteur))
-
+        self.image.fill(COULEURMENU)
+        #self.image.fill(COULEURMENU)
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
@@ -126,6 +128,42 @@ class Jeu :
     def detruire(self) :
         pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
 
+class Regles :
+    def __init__(self, regles, *groupes):
+        self._fenetre = regles.fenetre
+        regles.fond = (0, 0, 0)
+
+        from itertools import cycle
+        couleurs = [(0, 48, i) for i in range(0, 256, 15)]
+        couleurs.extend(sorted(couleurs[1:-1], reverse=True))
+        self._couleurTexte = cycle(couleurs)
+
+        self._font = pygame.font.SysFont('Helvetica', 36, bold=True)
+        self.creerTexte()
+        self.rectTexte = self.texte.get_rect()
+        self.rectTexte.center = (surfaceW/2, surfaceH/2)
+        # Création d'un event
+        self._CLIGNOTER = pygame.USEREVENT + 1
+        pygame.time.set_timer(self._CLIGNOTER, 80)
+
+    def creerTexte(self) :
+        self.texte = self._font.render(
+            'LE JEU EST EN COURS D\'EXÉCUTION',
+            True,
+            next(self._couleurTexte)
+        )
+
+    def update(self, events) :
+        self._fenetre.blit(self.texte, self.rectTexte)
+        for event in events :
+            if event.type == self._CLIGNOTER :
+                self.creerTexte()
+                break
+
+    def detruire(self) :
+        pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
+
+
 
 class Application :
     """ Classe maîtresse gérant les différentes interfaces du jeu """
@@ -133,7 +171,7 @@ class Application :
         pygame.init()
         pygame.display.set_caption("SpringRunner")
 
-        self.fond = (150,)*3
+        self.fond = (COULEURMENU)
 
         self.fenetre = pygame.display.set_mode((surfaceW,surfaceH))
         # Groupe de sprites utilisé pour l'affichage
@@ -161,10 +199,11 @@ class Application :
     def regles(self):
         #Affichage des règles
         self._initialiser()
-        pygame.init()
-        self.ecran = pygame.display.set_mode((surfaceW,surfaceH))
-        pygame.display.set_caption("Règles")
-        self.clock = pygame.time.Clock()
+        self.ecran = Menu(self, self.groupeGlobal)
+        #pygame.init()
+        #self.ecran = pygame.display.set_mode((surfaceW,surfaceH))
+        #pygame.display.set_caption("Règles")
+        #self.clock = pygame.time.Clock()
 
     def quitter(self) :
         self.statut = False
