@@ -161,35 +161,36 @@ class Game:
                             self.joueur.acc.x = 0
                             self.joueur.vel.x = 0
                             self.joueur.sauter = False
+        else:
+            self.joueur.changeM = False
 
 
-
-                    '''if hit.rect.left > lowest.rect.left:
-                        lowest = hit
-                    if hit.rect.bottom > lowest.rect.bottom:
-                        lowest = hit
-                if self.joueur.pos.x < lowest.rect.right + 10 and self.joueur.pos.x>lowest.rect.left -10:
-                    if self.joueur.pos.y < lowest.rect.top +10 :
-                        self.joueur.pos.y = lowest.rect.top
-                        self.joueur.vel.y = 0
-                        self.joueur.sauter = False
-                    if self.joueur.pos.x > lowest.rect.left - 10 and self.joueur.pos.y > lowest.rect.top +10:
-                        self.joueur.pos.x = lowest.rect.left-10
-                        self.joueur.pos.y = self.joueur.pos.y -10
-                        self.joueur.acc.x = 0
-                        self.joueur.vel.y = 0
-                        self.joueur.vel.x = 0
-                        self.joueur.acc.y = 0
-                        self.joueur.sauter = False
-                        self.update()
-                        print("collision")'''
-
-        #test:
-        '''if self.joueur.rect.right >= LARGEURFENETRE /2:
-            for plat in self.plateformes:
-                plat.rect.x -= max(abs(self.joueur.vel.x), 2)
-                if plat.rect.right >= LARGEURFENETRE:
-                    plat.kill()'''
+        #             '''if hit.rect.left > lowest.rect.left:
+        #                 lowest = hit
+        #             if hit.rect.bottom > lowest.rect.bottom:
+        #                 lowest = hit
+        #         if self.joueur.pos.x < lowest.rect.right + 10 and self.joueur.pos.x>lowest.rect.left -10:
+        #             if self.joueur.pos.y < lowest.rect.top +10 :
+        #                 self.joueur.pos.y = lowest.rect.top
+        #                 self.joueur.vel.y = 0
+        #                 self.joueur.sauter = False
+        #             if self.joueur.pos.x > lowest.rect.left - 10 and self.joueur.pos.y > lowest.rect.top +10:
+        #                 self.joueur.pos.x = lowest.rect.left-10
+        #                 self.joueur.pos.y = self.joueur.pos.y -10
+        #                 self.joueur.acc.x = 0
+        #                 self.joueur.vel.y = 0
+        #                 self.joueur.vel.x = 0
+        #                 self.joueur.acc.y = 0
+        #                 self.joueur.sauter = False
+        #                 self.update()
+        #                 print("collision")'''
+        #
+        # #test:
+        # '''if self.joueur.rect.right >= LARGEURFENETRE /2:
+        #     for plat in self.plateformes:
+        #         plat.rect.x -= max(abs(self.joueur.vel.x), 2)
+        #         if plat.rect.right >= LARGEURFENETRE:
+        #             plat.kill()'''
 
         #Verif que le joueur est sur un pic
         hitMortel = pygame.sprite.spritecollide(self.joueur,self.pieges,False)
