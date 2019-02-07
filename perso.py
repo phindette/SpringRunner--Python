@@ -44,12 +44,12 @@ class Perso(pygame.sprite.Sprite):
         self.rect.y -=1
         if hits and not self.sauter:
             self.sauter = True
-            self.vel.y =-20
+            self.vel.y =-15
 
 
     def respawn(self,c):
         self.pos.x = c.rect.x
-        self.pos.y = c.rect.y
+        self.pos.y = c.rect.bottom
 
     '''def deplacer(self, dir):
         if dir == DROITE:
