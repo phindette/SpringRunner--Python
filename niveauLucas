@@ -48,3 +48,23 @@ elif niveau == 1:
 
                     for finniv in[(950,250)]:
                         goal.Goal(self,*finniv)
+
+
+if niveau == 1:
+    background.Background(self,"images/backgrounds/background_2.jpg")
+    self.joueur.pos = vec(20,620)
+    for plate in [(5,700),(388,700),(650,580),(520,450),(5,100),(120,450)]:
+        plat.Plat(self,*plate)
+
+    for piegee in []:
+        piege.Piege(self,*piegee)
+
+    for gravv in [(220,350),(120,250)] :
+        plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+    self.checkpointCourant = checkpoint.Check(self,50, 590)
+    for checkk in []:
+        checkpoint.Check(self,*checkk)
+
+    for finniv in[(0,0)]:
+        goal.Goal(self,*finniv)
