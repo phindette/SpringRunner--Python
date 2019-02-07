@@ -1,6 +1,8 @@
 import pygame
 from constantes import *
 import game
+import highscores
+import texte
 
 surfaceW = LARGEURFENETRE #Dimension de la fenêtre / Largeur
 surfaceH = HAUTEURFENETRE #Dimension de la fenêtre / Longueur
@@ -16,6 +18,7 @@ class Menu :
         # noms des menus et commandes associées
         items = (
             ('JOUER', application.jeu),
+            ('CLASSEMENT', application.classement),
             ('RÈGLES', application.regles),
             ('CREDITS', application.credits),
             ('QUITTER', application.quitter)
@@ -133,8 +136,7 @@ class Jeu :
 class Regles :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
-        self.image=pygame.Surface((surfaceW, surfaceH))
-        self.image = pygame.image.load("images/backgrounds/background_regles-texte.jpg").convert_alpha()
+
         font = pygame.font.SysFont('Helvetica', 24, bold=True)
 
         items = (
@@ -238,6 +240,97 @@ class Credits :
     def detruire(self) :
             pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
 
+
+class Classement  :
+    def __init__(self, regles, *groupes):
+        self.regles = regles
+        self._fenetre = regles.fenetre
+        #Ma version :
+        font = pygame.font.SysFont('Helvetica', 24, bold=True)
+
+        items = (
+            ('RETOUR', regles.retour)
+        )
+        x = surfaceW/2
+        y = surfaceH/2 -200
+        self._boutons = []
+        mb = MenuBouton('RETOUR',(255,0,0),font,150,50,200,50,regles.retour)
+        self._boutons.append(mb)
+        y += 120
+        for groupe in groupes :
+            groupe.add(mb)
+
+
+        self.image=pygame.Surface((surfaceW, surfaceH))
+        self.image = pygame.image.load("images/backgrounds/background_1.png").convert_alpha()
+
+        pygame.display.update()
+
+        self._CLIGNOTER = pygame.USEREVENT + 1
+        pygame.time.set_timer(self._CLIGNOTER, 80)
+
+        f=open("highscores.txt","r")
+        #chope le premier mot (pseudo)
+        l = []
+        for ligne in f:
+            ligne = ligne.replace('\n','')
+            l.append(ligne)
+        for x in range (1,8):
+            if x == 1:
+                self.l1 = texte.Texte(regles,str(x)+"er :"+" "+l[x-1],LARGEURFENETRE/2 -200,100,400,50,False,False)
+            if x == 2:
+                self.l2 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,200,400,50,False,False)
+            if x == 3:
+                self.l3 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,300,400,50,False,False)
+            if x == 4:
+                self.l4 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,400,400,50,False,False)
+            if x == 5:
+                self.l5 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,500,400,50,False,False)
+            if x == 6:
+                self.l6 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,600,400,50,False,False)
+            if x == 7:
+                self.l7 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,700,400,50,False,False)
+        f.close()
+
+
+
+    def update(self, events) :
+        self._fenetre.blit(self.image,(0,0))
+        self._fenetre.blit(self.l1.textSurf, self.l1.rect)
+        self._fenetre.blit(self.l2.textSurf, self.l2.rect)
+        self._fenetre.blit(self.l3.textSurf, self.l3.rect)
+        self._fenetre.blit(self.l4.textSurf, self.l4.rect)
+        self._fenetre.blit(self.l5.textSurf, self.l5.rect)
+        self._fenetre.blit(self.l6.textSurf, self.l6.rect)
+        self._fenetre.blit(self.l7.textSurf, self.l7.rect)
+
+        #self._fenetre.blit(self.image,(0,0))
+        clicGauche, *_ = pygame.mouse.get_pressed()
+        posPointeur = pygame.mouse.get_pos()
+        for bouton in self._boutons :
+            # Si le pointeur souris est au-dessus d'un bouton
+            if bouton.rect.collidepoint(*posPointeur) :
+                # Changement du curseur par un quelconque
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+                # Changement de la couleur du bouton
+                bouton.dessiner((0, 200, 200))
+                # Si le clic gauche a été pressé
+                if clicGauche :
+                    # Appel de la fonction du bouton
+                    bouton.executerCommande()
+                break
+            else :
+                # Le pointeur n'est pas au-dessus du bouton
+                bouton.dessiner((255,0,0))
+        else :
+            # Le pointeur n'est pas au-dessus d'un des boutons
+            # initialisation au pointeur par défaut
+            pygame.mouse.set_cursor(*pygame.cursors.arrow)
+
+    def detruire(self) :
+            pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
+
+
 class Application :
     """ Classe maîtresse gérant les différentes interfaces du jeu """
     def __init__(self) :
@@ -245,42 +338,48 @@ class Application :
         pygame.display.set_caption("SpringRunner")
 
         self.fond = (COULEURMENU)
-
+        self.textes = pygame.sprite.Group()
         self.fenetre = pygame.display.set_mode((surfaceW,surfaceH))
+        icon = pygame.image.load("images/Spring_Runner_Cover_Art.png").convert_alpha()
+        pygame.display.set_icon(icon)
         self.image=pygame.Surface((surfaceW, surfaceH))
         self.image = pygame.image.load("images/backgrounds/background_1.png").convert_alpha()
         # Groupe de sprites utilisé pour l'affichage
-        self.groupeGlobal = pygame.sprite.Group()
+        self.les_sprites = pygame.sprite.Group()
         self.statut = True
 
     def _initialiser(self) :
         try:
             self.ecran.detruire()
             # Suppression de tous les sprites du groupe
-            self.groupeGlobal.empty()
+            self.les_sprites.empty()
         except AttributeError:
             pass
 
     def menu(self) :
         # Affichage du menu
         self._initialiser()
-        self.ecran = Menu(self, self.groupeGlobal)
+        self.ecran = Menu(self, self.les_sprites)
 
     def jeu(self) :
         # Affichage du jeu
         self._initialiser()
-        #self.ecran = Jeu(self, self.groupeGlobal)
+        #self.ecran = Jeu(self, self.les_sprites)
         g = game.Game()
 
         g.nouvellePartie()
     def retour(self):
         self._initialiser()
-        self.ecran = Menu(self, self.groupeGlobal)
+        self.ecran = Menu(self, self.les_sprites)
+    def classement(self):
+        #Affichage des règles
+        self._initialiser()
+        self.ecran = Classement(self, self.les_sprites)
 
     def regles(self):
         #Affichage des règles
         self._initialiser()
-        self.ecran = Regles(self, self.groupeGlobal)
+        self.ecran = Regles(self, self.les_sprites)
 
 
         #pygame.init()
@@ -290,7 +389,7 @@ class Application :
 
     def credits(self):
         self._initialiser()
-        self.ecran = Credits(self, self.groupeGlobal)
+        self.ecran = Credits(self, self.les_sprites)
 
     def quitter(self) :
         self.statut = False
@@ -306,8 +405,8 @@ class Application :
         self.fenetre.fill(self.fond)
         self.fenetre.blit(self.image,(0,0))
         self.ecran.update(events)
-        self.groupeGlobal.update()
-        self.groupeGlobal.draw(self.fenetre)
+        self.les_sprites.update()
+        self.les_sprites.draw(self.fenetre)
         pygame.display.update()
 
 

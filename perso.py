@@ -97,11 +97,11 @@ class Perso(pygame.sprite.Sprite):
         #     self.gravite = False
         #     self.changeM = False
         self.acc = vec(0,0.80)
-        if keys[pygame.K_z]:
+        if keys[pygame.K_z] or keys[pygame.K_w] :
             if self.zeroGrav:
                 self.acc = vec(0,-0.8)
 
-        if keys[pygame.K_q]:
+        if keys[pygame.K_q] or keys[pygame.K_a] :
             if self.vel.y < -0.0:
                 self.acc.x = -1
                 self.animation = "JL"

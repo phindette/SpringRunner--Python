@@ -7,6 +7,10 @@ class Piege(pygame.sprite.Sprite):
         self.groups = game.les_sprites,game.pieges
         pygame.sprite.Sprite.__init__(self,self.groups)
         self.game = game
+        # 1 = piques orientés vers le nord
+        # 2 = piques orientés vers l'ouest
+        # 3 = piques orientés vers l'est
+        # 4 = piques orientés vers le sud
         if cf == 1 :
             self.image = pygame.image.load("images/piege/spikes1.png").convert_alpha()
         elif cf == 2 :
