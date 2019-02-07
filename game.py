@@ -77,7 +77,7 @@ class Game:
         if self.seconds > 60:
             self.minutes += 1
             self.seconds -= 60
-            pygame.mixer.music.rewind()
+
 
 
         #VERIF DE LA FIN DU JEU
