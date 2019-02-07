@@ -20,7 +20,7 @@ class Highscores:
             for x in contenu:
                 li = x.split(':',1)
                 li = [li[0].split(' ') , li[1].split(' ')]
-                if score>int(li[1]):
+                if score > int(li[1][0]) :
                     li[0][0]=joueur
                     li[1][0]=str(score)
                     for y in reversed(range(contenu.index(x)+1,len(contenu)-1)):
@@ -32,6 +32,6 @@ class Highscores:
             for x in contenu :
                 f.write(x)
             f.close()
-            self.displayHighscores()
+            '''self.displayHighscores()
         else:
-            self.displayHighscores()
+            self.displayHighscores()'''
