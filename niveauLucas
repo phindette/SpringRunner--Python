@@ -1,0 +1,49 @@
+elif niveau == 1:
+        background.Background(self,"images/backgrounds/background_1.png")
+        self.joueur.pos = vec(60,100)
+
+        for plate in [(20,120),(220,0,2),(220,100,2),(220,200,2),(120,300),
+        (170,450),(370,320),(478,200,2)]:
+  plat.Plat(self,*plate)
+
+        for piegee in [(0,757,4),(100,757,4),(200,757,4),(300,757,4),(400,757,4),(500,757,4),(600,757,4),(700,757,4),(800,757,4),(900,757,4),
+        (210,0,2),(210,100,2),(210,200,2),(120,290,4),
+        (10,440,4),
+        (0,-60,4),(100,-60,4),(200,-60,4),(300,-60,4),(400,-60,4),(500,-60,4),(600,-60,4),(700,-60,4),(800,-60,4),(900,-60,4),
+        (535,0,2),(470,200,2)]:
+            piege.Piege(self,*piegee)
+
+        for gravv in [(10,180),(10,280),
+        (270,65),(300,-35),(400,-35),
+        (540,120)] :
+            plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+        self.checkpointCourant = checkpoint.Check(self,60,0)
+        for checkk in [(410,205)]:
+            checkpoint.Check(self,*checkk)
+
+        for finniv in[(950,250)]:
+            goal.Goal(self,*finniv)
+
+
+            elif niveau == 1:
+                    background.Background(self,"images/backgrounds/background_1.png")
+                    self.joueur.pos = vec(60,100)
+
+                    for plate in [(20,120),(490,0,2),(490,100,2),(490,200,2),(490,300,2),(490,400,2),(490,455,2)]:
+                      plat.Plat(self,*plate)
+
+                    for piegee in [  (0,-60,4),(100,-60,4),(200,-60,4),(300,-60,4),(400,-60,4),(500,-60,4),(600,-60,4),(700,-60,4),(800,-60,4),(900,-60,4),
+                      (480,0,2),(480,100,2),(480,200,2),(480,300,2),(480,400,2),(480,455,2),
+                      (490,0,3),(490,100,3),(490,200,3),(490,300,3),(490,400,3),(490,455,3)]:
+                        piege.Piege(self,*piegee)
+
+                    for gravv in [] :
+                        plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+                    self.checkpointCourant = checkpoint.Check(self,60,0)
+                    for checkk in []:
+                      checkpoint.Check(self,*checkk)
+
+                    for finniv in[(950,250)]:
+                        goal.Goal(self,*finniv)

@@ -301,23 +301,3 @@ class Game:
 
             for finniv in[(600,718)]:
                 goal.Goal(self,*finniv)
-
-        elif niveau == 1:
-            background.Background(self,"images/backgrounds/background_1.png")
-            self.joueur.pos = vec(60,100)
-
-            for plate in [(20,120),(220,0,2),(220,100,2),(220,200,2),(120,300)]:
-                plat.Plat(self,*plate)
-
-            for piegee in [(0,738,4)]:
-                piege.Piege(self,*piegee)
-
-            for gravv in [] :
-                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
-
-            self.checkpointCourant = checkpoint.Check(self,60,5)
-            for checkk in []:
-                checkpoint.Check(self,*checkk)
-
-            for finniv in[(950,250)]:
-                goal.Goal(self,*finniv)
