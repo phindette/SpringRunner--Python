@@ -89,7 +89,7 @@ class MenuBouton(pygame.sprite.Sprite) :
         self.image.blit(self.texte, self.rectTexte)
 
     def executerCommande(self) :
-        # Appel de la commande du bouton
+        # el de la commande du bouton
         self._commande()
 
 
@@ -133,7 +133,7 @@ class Regles :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
         self.image=pygame.Surface((surfaceW, surfaceH))
-        self.image = pygame.image.load("background_menu.jpg").convert_alpha()
+        self.image = pygame.image.load("images/backgrounds/background_regles-texte.jpg").convert_alpha()
         #regles.fond = (0, 0, 0)
 
         self._couleurTexte = (227,128,75)
@@ -149,11 +149,9 @@ class Regles :
     def creerTexte(self) :
         #fichier = open("regles.txt", "r")
         self._font = pygame.font.SysFont('Helvetica', 10, bold=True)
-        self.texte= self._font.render("""Bienvenue dans SpringRunner, le tout nouveau jeu de plateforme !\n
-        Le but du jeu est d'arriver le plus loin possible dans les différents niveaux en 3 minutes.
-        Pour cela vous devez déplacer votre personnage de plateformes en plateformes en évitant les piques.
-        Si vous mourrez, vous apparaissez à nouveau au dernier checkpoint.""", True, self._couleurTexte)
+        self.texte= self._font.render(""" """, True, self._couleurTexte)
     def update(self, events) :
+        self._fenetre.blit(self.image,(0,0))
         self._fenetre.blit(self.texte, self.rectTexte)
         for event in events :
             if event.type == self._CLIGNOTER :
@@ -174,6 +172,8 @@ class Application :
         self.fond = (COULEURMENU)
 
         self.fenetre = pygame.display.set_mode((surfaceW,surfaceH))
+        self.image=pygame.Surface((surfaceW, surfaceH))
+        self.image = pygame.image.load("images/backgrounds/background_1.png").convert_alpha()
         # Groupe de sprites utilisé pour l'affichage
         self.groupeGlobal = pygame.sprite.Group()
         self.statut = True
@@ -194,12 +194,11 @@ class Application :
     def jeu(self) :
         # Affichage du jeu
         self._initialiser()
-        print("tamer")
         #self.ecran = Jeu(self, self.groupeGlobal)
         g = game.Game()
-        while g.enCours:
-            g.nouvellePartie()
-        pygame.quit()
+
+        g.nouvellePartie()
+
 
     def regles(self):
         #Affichage des règles
@@ -222,6 +221,7 @@ class Application :
                 return
 
         self.fenetre.fill(self.fond)
+        self.fenetre.blit(self.image,(0,0))
         self.ecran.update(events)
         self.groupeGlobal.update()
         self.groupeGlobal.draw(self.fenetre)
