@@ -135,7 +135,7 @@ class Game:
                         if self.joueur.gravite:
                             self.joueur.changeM = True
                     #Si le joueur est en dessous de la plateformes
-                    if self.joueur.pos.y > plat.rect.bottom -10:
+                    if self.joueur.pos.y > plat.rect.bottom +10:
                         self.joueur.pos.y = plat.rect.bottom +75
                         self.joueur.acc.y = 0
                         self.joueur.vel.y = 0
@@ -149,8 +149,8 @@ class Game:
                             self.joueur.pos.y = platBas.rect.top #positionne le joueur sur la plateforme
                             self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
                             self.joueur.sauter = False #le joueur n'est plus en train de sauter
-                        if self.joueur.pos.x > platDroit.rect.right -20 and self.joueur.pos.y > plat.rect.top:
-                            self.joueur.pos.x = platDroit.rect.right +10 #positionne le joueur contre la partie droite
+                        if self.joueur.pos.x > platDroit.rect.right -20 and self.joueur.pos.y > platDroit.rect.top:
+                            self.joueur.pos.x = platDroit.rect.right +22 #positionne le joueur contre la partie droite
                             self.joueur.acc.x = 0
                             self.joueur.sauter = False
                     #colision a gauche:
@@ -160,8 +160,9 @@ class Game:
                             self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
                             self.joueur.sauter = False #le joueur n'est plus en train de sauter
                         if self.joueur.pos.x < platGauche.rect.left +20 and self.joueur.pos.y > platGauche.rect.top:
-                            self.joueur.pos.x = self.joue
-
+                            self.joueur.pos.x = platGauche.rect.left -22 #positionne le joueur contre la partie gauche
+                            self.joueur.acc.x = 0
+                            self.joueur.sauter = False
         '''    else :
                 self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
             print(self.seconds)
@@ -299,24 +300,4 @@ class Game:
                 checkpoint.Check(self,*checkk)
 
             for finniv in[(600,718)]:
-                goal.Goal(self,*finniv)
-
-        elif niveau == 1:
-            background.Background(self,"images/backgrounds/background_1.png")
-            self.joueur.pos = vec(60,100)
-
-            for plate in [(20,120),(220,0,2),(220,100,2),(220,200,2),(120,300)]:
-                plat.Plat(self,*plate)
-
-            for piegee in [(0,738,4)]:
-                piege.Piege(self,*piegee)
-
-            for gravv in [] :
-                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
-
-            self.checkpointCourant = checkpoint.Check(self,60,5)
-            for checkk in []:
-                checkpoint.Check(self,*checkk)
-
-            for finniv in[(950,250)]:
                 goal.Goal(self,*finniv)
