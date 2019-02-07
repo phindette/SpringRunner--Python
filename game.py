@@ -9,6 +9,7 @@ import piege
 import checkpoint
 import goal
 import texte
+import background
 
 
 class Game:
@@ -16,7 +17,7 @@ class Game:
         #Initialisation de la fenettre de jeu etc...
         pygame.init()
         self.screen = pygame.display.set_mode((LARGEURFENETRE,HAUTEURFENETRE))
-        pygame.display.set_caption("JEU DE FOU")
+        pygame.display.set_caption("Spring Runner")
         self.clock = pygame.time.Clock() #je ne sais pas encore en quoi ça consiste vraiment.
         self.enCours = True;
 
@@ -85,7 +86,6 @@ class Game:
 
                     #Si le joueur est à gauche de la plateforme
                     if self.joueur.pos.x < plat.rect.left +20 and self.joueur.pos.y > plat.rect.top:
-                        print("tamer")
                         self.joueur.pos.x = plat.rect.left -10 #positionne le joueur contre la partie gauche de la plateforme
                         self.joueur.acc.x = 0
                         self.joueur.vel.x = 0
@@ -94,7 +94,6 @@ class Game:
                             self.joueur.changeM = True
                     #Si le joueur est à droite de la plateforme
                     if self.joueur.pos.x > plat.rect.right -20 and self.joueur.pos.y > plat.rect.top:
-                        print("tamer2")
                         self.joueur.pos.x = plat.rect.right +10 #positionne le joueur contre la partie droite
                         self.joueur.acc.x = 0
                         self.joueur.vel.x = 0
@@ -117,7 +116,6 @@ class Game:
                             self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
                             self.joueur.sauter = False #le joueur n'est plus en train de sauter
                         if self.joueur.pos.x > platDroit.rect.right -20 and self.joueur.pos.y > plat.rect.top:
-                            print("tamer2")
                             self.joueur.pos.x = platDroit.rect.right +10 #positionne le joueur contre la partie droite
                             self.joueur.acc.x = 0
                             self.joueur.sauter = False
@@ -128,7 +126,6 @@ class Game:
                             self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
                             self.joueur.sauter = False #le joueur n'est plus en train de sauter
                         if self.joueur.pos.x < platGauche.rect.left +20 and self.joueur.pos.y > platGauche.rect.top:
-                            print("tamer")
                             self.joueur.pos.x = self.joueur.pos.x - 20 #positionne le joueur contre la partie gauche de la plateforme
                             self.joueur.acc.x = 0
                             self.joueur.vel.x = 0
@@ -163,9 +160,9 @@ class Game:
                 if plat.rect.right >= LARGEURFENETRE:
                     plat.kill()'''
 
-        #Verif que le joueur est sur un pic
+        #Verif que le joueur est sur un pic ou hors écran
         hitMortel = pygame.sprite.spritecollide(self.joueur,self.pieges,False)
-        if hitMortel:
+        if hitMortel or self.joueur.pos[0] < 0 or self.joueur.pos[0] > 1024 or self.joueur.pos[1] < 0 or self.joueur.pos[1] > 768:
             self.joueur.respawn(self.checkpointCourant)
 
         #Verif que le joueur a activé un checkpoint
@@ -211,29 +208,35 @@ class Game:
         self.check.empty()
         self.joueur = perso.Perso(self)
 
-        texte.Texte(self,"tamer")
         if niveau == 1:
-            for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
+            background.Background(self,"images/backgrounds/background_2.jpg")
+
+            for plate in [(0, 728),(512, 384),(125, 578),(350, 200),(175, 100),(0,438)]:
                 plat.Plat(self,*plate)
 
-            for piegee in [(0, HAUTEURFENETRE - 300)]:
+            for piegee in [(0, 468)]:
                 piege.Piege(self,*piegee)
 
-            for checkk in [(200, HAUTEURFENETRE - 300),(50, HAUTEURFENETRE - 150)]:
+            self.checkpointCourant = checkpoint.Check(self,50, 618)
+            for checkk in [(200, 468)]:
                 checkpoint.Check(self,*checkk)
 
-            for finniv in[(400,HAUTEURFENETRE - 50)]:
+            for finniv in[(400,718)]:
                 goal.Goal(self,*finniv)
 
+
+
         elif niveau == 2:
-            for plate in [(0, HAUTEURFENETRE - 60),(LARGEURFENETRE / 2 , HAUTEURFENETRE * 2 / 4 ),(125, HAUTEURFENETRE - 150),(350, 200),(175, 100)]:
+            background.Background(self,"images/backgrounds/background_1.png")
+            for plate in [(0, 728),(512 , 384 ),(125, 578),(350, 200),(175, 100),(0,438)]:
                 plat.Plat(self,*plate)
 
-            for piegee in [(0, HAUTEURFENETRE - 300)]:
+            for piegee in [(0, 468)]:
                 piege.Piege(self,*piegee)
 
-            for checkk in [(200, HAUTEURFENETRE - 300),(50, HAUTEURFENETRE - 150)]:
+            self.checkpointCourant = checkpoint.Check(self,50, 618)
+            for checkk in [(200, 468)]:
                 checkpoint.Check(self,*checkk)
 
-            for finniv in[(600,HAUTEURFENETRE - 50)]:
+            for finniv in[(600,718)]:
                 goal.Goal(self,*finniv)

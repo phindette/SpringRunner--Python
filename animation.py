@@ -15,14 +15,14 @@ class SpriteSheet(object):
 def loadSprites(list,sprites,nbimage,largeur,hauteur):
     for i in range(0,nbimage):
         image = sprites.get_image(largeur*i,0,largeur,hauteur)
-        for j in range(0,3):
+        for j in range(0,2):
             list.append(image)
 
 def loadSpritesInverted(list,sprites,nbimage,largeur,hauteur):
     for i in range(0,nbimage):
         image = sprites.get_image(largeur*i,0,largeur,hauteur)
         image = pygame.transform.flip(image, True, False)
-        for j in range(0,3):
+        for j in range(0,2):
             list.append(image)
 
 def initTabSprites(nbAnimations):

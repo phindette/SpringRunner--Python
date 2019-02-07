@@ -7,7 +7,7 @@ class Plat(pygame.sprite.Sprite):
         self.groups = game.les_sprites,game.plateformes
         pygame.sprite.Sprite.__init__(self,self.groups)
         self.game = game
-        self.image = pygame.image.load("bloc.png").convert_alpha()
+        self.image = pygame.image.load("images/plateform/test_platform_1.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

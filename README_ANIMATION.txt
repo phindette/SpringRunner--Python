@@ -25,9 +25,9 @@ Pour chaques classes d'objets ayant des animations, il faut rajouter :
 ----> self.rect.center = (0, HAUTEURFENETRE - 60)
 ----> // ... fin du __init__
 
----> >>Dans charger image //ne doit contenir que les lignes suivantes
+---> >>Dans def charger_image(self) //ne doit contenir que les lignes suivantes
 ----> // POUR CHAQUE TABLEAU DANS spritesCollection ajouter :
-----> LoadSprites(self.spritesCollection[I],SPRITESHEET,NB,LARGEUR,HAUTEUR)
+----> loadSprites(self.spritesCollection[I],SPRITESHEET,NB,LARGEUR,HAUTEUR)
 ----> // Découpe les sprites et les répartie dans spritesCollection
 ----> // I = numéro de l'animation concernée
 ----> // SPRITESHEET = Spritesheet concernée (ex : self.spritesDebout)

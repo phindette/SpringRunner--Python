@@ -6,6 +6,7 @@ vec = pygame.math.Vector2
 
 class Perso(pygame.sprite.Sprite):
     def __init__(self,game):
+        self._layer = 1
         self.groupes = game.les_sprites
         pygame.sprite.Sprite.__init__(self,game.les_sprites)
         self.game = game
@@ -14,9 +15,9 @@ class Perso(pygame.sprite.Sprite):
         self.animation = "SR"
         self.index = 0
         self.spritesCollection = initTabSprites(6).copy()
-        self.spritesDebout = SpriteSheet("chara0.png")
-        self.spritesMarche = SpriteSheet("chara_walking_right_spritesheet.png")
-        self.spritesSaut = SpriteSheet("chara_jumping.png")
+        self.spritesDebout = SpriteSheet("images/chara/chara_still.png")
+        self.spritesMarche = SpriteSheet("images/chara/chara_walking_right_spritesheet.png")
+        self.spritesSaut = SpriteSheet("images/chara/chara_jumping.png")
         self.charger_images()
         self.image = self.spritesCollection[0][0]
         self.rect = self.image.get_rect()
@@ -30,8 +31,8 @@ class Perso(pygame.sprite.Sprite):
 
     def charger_images(self):
         #charger les images (pour l'instant que l'image de base)
-        loadSprites(self.spritesCollection[0],self.spritesDebout,1,35,60)
-        loadSpritesInverted(self.spritesCollection[1],self.spritesDebout,1,35,60)
+        loadSprites(self.spritesCollection[0],self.spritesDebout,10,35,60)
+        loadSpritesInverted(self.spritesCollection[1],self.spritesDebout,10,35,60)
         loadSprites(self.spritesCollection[2],self.spritesMarche,8,35,60)
         loadSpritesInverted(self.spritesCollection[3],self.spritesMarche,8,35,60)
         loadSprites(self.spritesCollection[4],self.spritesSaut,1,35,60)
@@ -59,7 +60,6 @@ class Perso(pygame.sprite.Sprite):
                 self.rect.x -=1'''
 
     def update(self):
-        print("actu")
         # self.acc = vec(0,0.8)
         # self.acc = vec(0,0.80)
         self.index += 1
@@ -88,7 +88,6 @@ class Perso(pygame.sprite.Sprite):
                 self.index=0
             self.image = self.spritesCollection[5][self.index]
 
-        print(self.vel.y)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
             self.gravite = True
