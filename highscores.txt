@@ -1,10 +1,10 @@
-jack 13
-mickael 12
-margoulin 12
-thierry 12
-thierry 12
-thierry 12
-thierry 12
-jack 11
-thpute 11
- 11
+empty               score :0 points
+empty               score :0 points
+empty               score :0 points
+empty               score :0 points
+empty               score :0 points
+empty               score :0 points
+empty               score :0 points
+empty               score :0 points
+empty               score :0 points
+empty               score :0 points
