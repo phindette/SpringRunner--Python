@@ -2,7 +2,7 @@ import pygame
 from constantes import *
 
 class Piege(pygame.sprite.Sprite):
-    def __init__(self,game,x,y,cf):
+    def __init__(self,game,x,y,cf=1):
         self._layer = 1
         self.groups = game.les_sprites,game.pieges
         pygame.sprite.Sprite.__init__(self,self.groups)
