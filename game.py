@@ -83,7 +83,7 @@ class Game:
         if(self.minutes >=3):
             self.en_jeu = False
             self.fin = fin.Application()
-            self.fin.startFin()
+            self.fin.startFin(self.niveau)
 
 
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
@@ -284,27 +284,27 @@ class Game:
 
         elif niveau == 1:
             background.Background(self,"images/backgrounds/background_1.png")
-            for plate in [(0, 150)]:
+            for plate in [(0, 150),(210,0,2),(210,100,2),(210,200,2),(210,500,2),(210,600,2),(210,700,2) #,(210,300,2)
+            ,(450,700,1)]:
                 plat.Plat(self,*plate)
 
-            for piegee in []:
+            for piegee in [(200,0,2),(200,100,2),(200,200,2),(200,500,2),(200,600,2),(200,700,2)]: #,(200,300,2)
                 piege.Piege(self,*piegee)
 
-            for gravv in [(100,150),(100,250),(100,350),(100,450),(100,550)] :
+            for gravv in [(100,150),(100,250),(100,350),(100,450),(100,550),(100,650)] :
                 plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
 
             self.checkpointCourant = checkpoint.Check(self,10, 40)
             for checkk in []:
                 checkpoint.Check(self,*checkk)
 
-            for finniv in[(800,250)]:
+            for finniv in[(500,650)]:
                 goal.Goal(self,*finniv)
             self.joueur = perso.Perso(self)
             self.joueur.pos = vec(40,20)
 
         elif niveau == 2:
             background.Background(self,"images/backgrounds/background_1.png")
-            self.joueur.pos = vec(40,150)
             for plate in [(0, 150)]:
                 plat.Plat(self,*plate)
 
@@ -320,3 +320,5 @@ class Game:
 
             for finniv in[(600,718)]:
                 goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(40,150)
