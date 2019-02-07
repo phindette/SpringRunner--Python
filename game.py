@@ -77,7 +77,7 @@ class Game:
             print(self.seconds)
             #else :
             #    self.seconds = '0' + str(minutes) + ':' +'0' +  str(ingametimer)
-            texte.Texte(self,self.seconds)
+            texte.Texte(self,self.seconds,LARGEURFENETRE-200)
 
 
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
@@ -235,8 +235,8 @@ class Game:
         #MISE EN PLACE DU NOMBRE DE POINTS
         pts = self.niveau
         stringpts = "Points : " + str(self.niveau)
-        self.pts = texte.Texte(self,stringpts)
-        self.pts.rect.x = LARGEURFENETRE-200
+        self.pts = texte.Texte(self,stringpts,LARGEURFENETRE-100)
+
 
         if niveau == 1:
             background.Background(self,"images/backgrounds/background_2.jpg")
