@@ -300,5 +300,3 @@ class Game:
 
             for finniv in[(600,718)]:
                 goal.Goal(self,*finniv)
-
-        
