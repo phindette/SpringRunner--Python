@@ -173,23 +173,45 @@ class Jeu :
 
     def detruire(self) :
         pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
-
-class Regles :
+#enfaite ici c'est classement :)
+class Regles  :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
 
         #Ma version :
-        self.titre = texte.Texte(regles,"test :")
 
-    def creerTexte(self) :
-        #fichier = open("regles.txt", "r")
-        self._font = pygame.font.SysFont('Helvetica', 10, bold=True)
-        self.texte= self._font.render("""Bienvenue dans SpringRunner, le tout nouveau jeu de plateforme !\n
-        Le but du jeu est d'arriver le plus loin possible dans les différents niveaux en 3 minutes.
-        Pour cela vous devez déplacer votre personnage de plateformes en plateformes en évitant les piques.
-        Si vous mourrez, vous apparaissez à nouveau au dernier checkpoint.""", True, self._couleurTexte)
+        f=open("highscores.txt","r")
+        #chope le premier mot (pseudo)
+        l = []
+        for ligne in f:
+            ligne = ligne.replace('\n','')
+            l.append(ligne)
+        for x in range (1,len(l)):
+            if x == 1:
+                self.l1 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,100,400)
+            if x == 2:
+                self.l2 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,200,400)
+            if x == 3:
+                self.l3 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,300,400)
+            if x == 4:
+                self.l4 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,400,400)
+            if x == 5:
+                self.l5 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,500,400)
+            if x == 6:
+                self.l6 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,600,400)
+            if x == 7:
+                self.l7 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,700,400)
+
+
+
     def update(self, events) :
-        self._fenetre.blit(self.titre.textSurf, self.titre.rect)
+        self._fenetre.blit(self.l1.textSurf, self.l1.rect)
+        self._fenetre.blit(self.l2.textSurf, self.l2.rect)
+        self._fenetre.blit(self.l3.textSurf, self.l3.rect)
+        self._fenetre.blit(self.l4.textSurf, self.l4.rect)
+        self._fenetre.blit(self.l5.textSurf, self.l5.rect)
+        self._fenetre.blit(self.l6.textSurf, self.l6.rect)
+        self._fenetre.blit(self.l7.textSurf, self.l7.rect)
         '''for event in events :
             if event.type == self._CLIGNOTER :
                 self.creerTexte()
