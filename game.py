@@ -20,6 +20,8 @@ class Game:
         pygame.display.set_caption("Spring Runner")
         self.clock = pygame.time.Clock() #je ne sais pas encore en quoi ça consiste vraiment.
         self.enCours = True;
+        pygame.mixer.music.load("soundtrack/Actipognon_test_2.mp3")
+        pygame.mixer.music.play()
 
     def nouvellePartie(self):
         #Débute une nouvelle nouvellePartie
@@ -162,7 +164,7 @@ class Game:
 
         #Verif que le joueur est sur un pic ou hors écran
         hitMortel = pygame.sprite.spritecollide(self.joueur,self.pieges,False)
-        if hitMortel or self.joueur.pos[0] < 0 or self.joueur.pos[0] > 1024 or self.joueur.pos[1] < 0 or self.joueur.pos[1] > 768:
+        if hitMortel or self.joueur.pos[0] < 0 or self.joueur.pos[0] > 1024 or self.joueur.pos[1] > 768:
             self.joueur.respawn(self.checkpointCourant)
 
         #Verif que le joueur a activé un checkpoint
