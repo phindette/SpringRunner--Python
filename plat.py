@@ -15,7 +15,8 @@ class Plat(pygame.sprite.Sprite):
             self.image = pygame.image.load("images/plateform/test_platform_1enBas.png").convert_alpha()
         elif cd == 4 :
             self.image = pygame.image.load("images/plateform/test_platform_2droite.png").convert_alpha()
-            elif cd == 5 :
+        elif cd == 5 :
+            self.image = pygame.image.load("images/plateform/test_platform_2enBas.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
