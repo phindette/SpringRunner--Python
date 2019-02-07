@@ -23,6 +23,7 @@ class Game:
         self.enCours = True;
         pygame.mixer.music.load("soundtrack/Actipognon_test_2.mp3")
         pygame.mixer.music.play()
+        self.timer = 0
 
     def nouvellePartie(self):
         #Débute une nouvelle nouvellePartie
@@ -77,10 +78,13 @@ class Game:
             else :
                 self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
             print(self.seconds)
-            texte.Texte(self,self.seconds,LARGEURFENETRE-250)
+            if self.timer != 0:
+                print("ta petite maman")
+                self.timer.clear()
+            self.timer = texte.Texte(self,self.seconds,LARGEURFENETRE-250)
 
         #VERIF DE LA FIN DU JEU
-        if((pygame.time.get_ticks()-0)/1000 >= 5):
+        if((pygame.time.get_ticks()-0)/1000 >= 180):
             self.en_jeu = False
             self.fin = fin.Application()
             #fin = fin.Application()
