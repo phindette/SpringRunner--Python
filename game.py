@@ -78,9 +78,7 @@ class Game:
                 self.seconds = '0' + str(minutes) + ':' + '0'+ str(ingametimer)
             else :
                 self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
-            print(self.seconds)
             if self.timer != 0:
-                print("ta petite maman")
                 self.timer.clear()
             self.timer = texte.Texte(self,self.seconds,LARGEURFENETRE-250)
 
@@ -99,7 +97,6 @@ class Game:
             platGauche = hits[0]
             platHaut = hits[0]
             for hit in hits:
-                #print(hit.rect.bottom,"et ",)
                 if hit.rect.bottom >= platBas.rect.bottom:
                     platBas = hit
                 if hit.rect.left >= platGauche.rect.left:
@@ -162,7 +159,15 @@ class Game:
                             self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
                             self.joueur.sauter = False #le joueur n'est plus en train de sauter
                         if self.joueur.pos.x < platGauche.rect.left +20 and self.joueur.pos.y > platGauche.rect.top:
-                            self.joueur.pos.x = self.joueur.pos.x - 20 #positionne le joueur contre la partie gauche de la plateforme
+                            self.joueur.pos.x = self.joue                self.seconds = '0' + str(minutes) + ':' + '0'+ str(ingametimer)
+            else :
+                self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
+            print(self.seconds)
+            if self.timer != 0:
+                print("ta petite maman")
+                self.timer.clear()
+            self.timer = texte.Texte(self,self.seconds,LARGEURFENETRE-250)
+ur.pos.x - 20 #positionne le joueur contre la partie gauche de la plateforme
                             self.joueur.acc.x = 0
                             self.joueur.vel.x = 0
                             self.joueur.sauter = False
@@ -278,8 +283,7 @@ class Game:
         elif niveau == 2:
             background.Background(self,"images/backgrounds/background_1.png")
             self.joueur.pos = vec(40,150)
-            for plate in [(0, 150),(175 , 0),(175 , 30),(175 , 60),(175 , 90),(175 , 120),(175 , 150),(175 , 180)
-            ,(175 , 210),(175 , 240)]:
+            for plate in [(0, 150)]:
                 plat.Plat(self,*plate)
 
             for piegee in [(0,600)]:
