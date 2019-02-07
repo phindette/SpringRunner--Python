@@ -25,7 +25,6 @@ class Game:
         self.enCours = True;
         pygame.mixer.music.load("soundtrack/Actipognon_test_2.mp3")
         pygame.mixer.music.play()
-        self.timer = 0
 
     def nouvellePartie(self):
         #Débute une nouvelle nouvellePartie
@@ -41,6 +40,7 @@ class Game:
         #MISE EN PLACE DES SPRITE POUR LE NIVEAU 1
         self.niveau = 1
         self.initNiveau(self.niveau)
+        self.c = False
 
 
         self.start()
@@ -52,8 +52,12 @@ class Game:
         #Boucle du jeu
         self.en_jeu = True
         fps = 60
+        self.minutes = 0
+        self.seconds = 0
+        self.milliseconds = 0
         while self.en_jeu:
             self.clock.tick(fps)
+            self.milliseconds += 1
             self.events()
             self.update()
             self.draw()
@@ -61,34 +65,26 @@ class Game:
     def update(self):
         #Mise à jour de la boucle du jeu
         self.les_sprites.update()
-        #MISE EN PLACE DU TIMER
-        if((pygame.time.get_ticks()-0)/1000)% 1 > 0.94 :
-            minutes = 0
-            ingametimer = 180 - round(((pygame.time.get_ticks()-0)/1000))
-            if ingametimer >= 180 :
-                minutes = 3
-                ingametimer -= 180
-            elif ingametimer >= 120 :
-                minutes = 2
-                ingametimer -= 120
-            elif ingametimer >= 60 :
-                minutes = 1
-                ingametimer -= 60
 
-            if ingametimer < 10 :
-                self.seconds = '0' + str(minutes) + ':' + '0'+ str(ingametimer)
-            else :
-                self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
-            if self.timer != 0:
+        #MISE EN PLACE DU TIMER 1
+        if self.milliseconds > 60:
+            if self.c:
                 self.timer.clear()
-            self.timer = texte.Texte(self,self.seconds,LARGEURFENETRE-250)
+            self.seconds += 1
+            self.milliseconds -= 60
+            self.c = True
+            self.timer = texte.Texte(self,str(self.minutes)+":"+str(self.seconds),LARGEURFENETRE-200)
+        if self.seconds > 60:
+            self.minutes += 1
+            self.seconds -= 60
+
 
         #VERIF DE LA FIN DU JEU
-        if((pygame.time.get_ticks()-0)/1000 >= 180):
+        if(self.minutes >=3):
             self.en_jeu = False
             self.fin = fin.Application()
-            #fin = fin.Application()
             self.fin.startFin()
+
 
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
         hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)
@@ -247,6 +243,7 @@ class Game:
     def draw(self):
         #Déssin du jeu dans la boucle
         self.screen.fill((255,255,255))
+        #self.screen.surface.fill()
         self.les_sprites.draw(self.screen)
         pygame.display.flip()
 
@@ -255,7 +252,10 @@ class Game:
         self.plateformes.empty()
         self.pieges.empty()
         self.check.empty()
-        self.joueur = perso.Perso(self)
+        self.goals = pygame.sprite.Group()
+        self.plateformegGravite = pygame.sprite.Group()
+
+
 
         #MISE EN PLACE DU NOMBRE DE POINTS
         pts = self.niveau
@@ -275,13 +275,32 @@ class Game:
             for gravv in [(300,500),(300,400),(300,300),(400,500),(400,400),(400,300)] :
                 plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
 
-            self.checkpointCourant = checkpoint.Check(self,50, 618)
+            self.checkpointCourant = checkpoint.Check(self,80, 618)
             for checkk in []:
                 checkpoint.Check(self,*checkk)
 
             for finniv in[(950,250)]:
                 goal.Goal(self,*finniv)
 
+        elif niveau == 1:
+            background.Background(self,"images/backgrounds/background_1.png")
+            for plate in [(0, 150)]:
+                plat.Plat(self,*plate)
+
+            for piegee in []:
+                piege.Piege(self,*piegee)
+
+            for gravv in [(100,150),(100,250),(100,350),(100,450),(100,550)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,10, 40)
+            for checkk in []:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(800,250)]:
+                goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(40,20)
 
         elif niveau == 2:
             background.Background(self,"images/backgrounds/background_1.png")
