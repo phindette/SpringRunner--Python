@@ -1,10 +1,11 @@
 import pygame as pg
+from constantes import *
 
 
 pg.init()
-screen = pg.display.set_mode((640, 480))
+screen = pg.display.set_mode((LARGEURFENETRE, HAUTEURFENETRE))
 COLOR_INACTIVE = pg.Color(0,0,0)
-COLOR_ACTIVE = pg.Color('dodgerblue2')
+COLOR_ACTIVE = pg.Color(0,0,0)
 FONT = pg.font.Font(None, 32)
 
 
