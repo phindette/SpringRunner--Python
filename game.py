@@ -77,6 +77,7 @@ class Game:
         if self.seconds > 60:
             self.minutes += 1
             self.seconds -= 60
+            pygame.mixer.music.rewind()
 
 
         #VERIF DE LA FIN DU JEU
@@ -263,9 +264,8 @@ class Game:
         self.pts = texte.Texte(self,stringpts,LARGEURFENETRE-150,0,150)
 
 
-        if niveau == 3:
-            background.Background(self,"images/backgrounds/background_2.jpg")
-            self.joueur.pos = vec(20,HAUTEURFENETRE-80)
+        if niveau == 1: #VRAI NIVEAU 1
+            background.Background(self,"images/backgrounds/background_1.png")
             for plate in [(0, 728),(150,650),(700,300),(900,300)]:
                 plat.Plat(self,*plate)
 
@@ -281,8 +281,122 @@ class Game:
 
             for finniv in[(950,250)]:
                 goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(40,20)
 
-        elif niveau == 1:
+        elif niveau == 2: #VRAI NIVEAU 2
+            background.Background(self,"images/backgrounds/background_1.png")
+            for plate in [(0, 150)]:
+                plat.Plat(self,*plate)
+
+            for piegee in [(0,600)]:
+                piege.Piege(self,*piegee)
+
+            for gravv in [(300,500),(300,400),(300,300),(400,500),(400,400),(400,300)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,0, 40)
+            for checkk in []:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(600,718)]:
+                goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(40,150)
+
+        elif niveau == 3: #VRAI LEVEL 3
+            background.Background(self,"images/backgrounds/background_2.jpg")
+
+            for plate in [(5,700),(388,700),(650,580),(520,450),(5,100),(120,450)]:
+                plat.Plat(self,*plate)
+
+            for piegee in []:
+                piege.Piege(self,*piegee)
+
+            for gravv in [(220,350),(120,250)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,50, 590)
+            for checkk in []:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(0,0)]:
+                goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(20,620)
+
+        elif niveau == 4: #VRAI NIVEAU 4
+            background.Background(self,"images/backgrounds/background_2.jpg")
+
+            for plate in [(900,80),(725,600),(240,600),(946,600,6),
+            (805,0,4),(805,100,4),(805,200,4),(805,300,4),(805,364,4),(805,600,4)]:
+                plat.Plat(self,*plate)
+
+            for piegee in [(835,0,3),(835,100,3),(835,200,3),(835,300,3),(835,364,3),(835,600,3),(946,630),
+            (0,-60,4),(100,-60,4),(200,-60,4),(300,-60,4),(400,-60,4),(500,-60,4),(600,-60,4),(700,-60,4),(800,-60,4),(900,-60,4)]:
+                piege.Piege(self,*piegee)
+
+            for gravv in [(850,500),(850,600),(850,250),(560,500),
+            (120,500),(120,600),(120,400),(120,300)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,940, -35)
+            for checkk in [(760,490)]:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(155,0)]:
+                goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(950,50)
+
+        elif niveau == 5: #VRAI NIVEAU 5
+
+            background.Background(self,"images/backgrounds/background_1.png")
+
+            for plate in [(0, 728),(310, 550,2),(460, 450,2),(610, 350,2),(760,250,2)]:
+                plat.Plat(self,*plate)
+
+            for piegee in [(300,550,2),(450,450,2),(600,350,2),(750,250,2)]:
+                piege.Piege(self,*piegee)
+
+            for gravv in [(200,550),(350,450),(500,350),(650,250)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,10, 620)
+            for checkk in []:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(800,250)]:
+                goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(40,700)
+
+        elif niveau == 6: # VRAI LEVEL 6
+            background.Background(self,"images/backgrounds/background_1.png")
+
+
+            for plate in [(20,120,6),(455,680,6),
+                    (490,0,4),(490,100,4),(490,200,4),(490,300,4),(490,400,4),(490,455,4)]:
+                plat.Plat(self,*plate)
+
+            for piegee in [  (0,-60,4),(100,-60,4),(200,-60,4),(300,-60,4),(400,-60,4),(500,-60,4),(600,-60,4),(700,-60,4),(800,-60,4),(900,-60,4),
+                      (480,0,2),(480,100,2),(480,200,2),(480,300,2),(480,400,2),(480,455,2),
+                      (520,0,3),(520,100,3),(520,200,3),(520,300,3),(520,400,3),(520,455,3)]:
+                piege.Piege(self,*piegee)
+
+            for gravv in [(210,200),(210,300),(210,400),(210,500),(210,600),(210,100)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,60,0)
+            for checkk in [(530,560)]:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(950,250)]:
+                goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(60,100)
+
+        elif niveau == 7: #VRAI NIVEAU 7
             background.Background(self,"images/backgrounds/background_1.png")
             for plate in [(0, 150),(210,0,2),(210,100,2),(210,200,2),(210,500,2),(210,600,2),(210,700,2) #,(210,300,2)
             ,(450,700,1)]:
@@ -303,22 +417,158 @@ class Game:
             self.joueur = perso.Perso(self)
             self.joueur.pos = vec(40,20)
 
-        elif niveau == 2:
+        elif niveau == 8: #VRAI NIVEAU 8
+
             background.Background(self,"images/backgrounds/background_1.png")
-            for plate in [(0, 150)]:
+
+            for plate in [(0, 150),(0,410),(100,410),(200,410),(300,410),(400,410),(500,410),(600,410)
+                  ,(600,600),(0,410),(100,410),(200,410),(300,410),(400,410),(500,410),(600,410),(600,600)
+                  ,(0,440,3),(100,440,3),(200,440,3),(300,440,3),(400,440,3),(500,440,3),(600,440,3)]:
                 plat.Plat(self,*plate)
 
-            for piegee in [(0,600)]:
+            for piegee in [(0,400,4),(100,400,4),(200,400,4),(300,400,4),(400,400,4),(500,400,4),(600,400,4)
+                  ,(0,470,1),(100,470,1),(200,470,1),(300,470,1),(400,470,1),(500,470,1),(600,470,1)]:
                 piege.Piege(self,*piegee)
 
-            for gravv in [(300,500),(300,400),(300,300),(400,500),(400,400),(400,300)] :
+            for gravv in [(300,100),(500,200),(700,300),(700,400),(700,500)
+                  ,(500,550),(400,550),(300,550),(200,550),(100,550)] :
                 plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
 
             self.checkpointCourant = checkpoint.Check(self,0, 40)
             for checkk in []:
                 checkpoint.Check(self,*checkk)
 
-            for finniv in[(600,718)]:
+            for finniv in[(30,700)]:
+
                 goal.Goal(self,*finniv)
             self.joueur = perso.Perso(self)
             self.joueur.pos = vec(40,150)
+
+        elif niveau == 9: #VRAI LEVEL 9
+            background.Background(self,"images/backgrounds/background_1.png")
+
+
+            for plate in [(20,120),(220,0,2),(220,100,2),(220,200,2),(120,300),
+            (170,450),(370,320),(478,200,2),(545,0,2),(10,450)]:
+                plat.Plat(self,*plate)
+
+            for piegee in [(0,757,4),(100,757,4),(200,757,4),(300,757,4),(400,757,4),(500,757,4),(600,757,4),(700,757,4),(800,757,4),(900,757,4),
+            (210,0,2),(210,100,2),(210,200,2),(120,290,4),
+            (10,440,4),
+            (0,-60,4),(100,-60,4),(200,-60,4),(300,-60,4),(400,-60,4),(500,-60,4),(600,-60,4),(700,-60,4),(800,-60,4),(900,-60,4),
+            (535,0,2),(470,200,2)]:
+                piege.Piege(self,*piegee)
+
+            for gravv in [(10,180),(10,280),
+            (270,65),(300,-35),(400,-35),
+            (540,120)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,60,0)
+            for checkk in [(410,205)]:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(950,250)]:
+                goal.Goal(self,*finniv)
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(60,100)
+
+        elif niveau == 10:
+            background.Background(self,"images/backgrounds/background_2.jpg")
+            for plate in [(0, 150)]:
+                plat.Plat(self,*plate)
+
+            #pieges vers la droite descente
+            for piegee in [(100,170,3),(100,270,3),(100,370,3),(100,470,3),(100,570,3),(100,625,3)]:
+                piege.Piege(self,*piegee)
+
+            #piege vers la gauche descente
+            for piegee in [(185,-30,2),(185,70,2),(185,170,2),(185,270,2),(185,370,2),(185,470,2)]:
+                piege.Piege(self,*piegee)
+
+            #piege vers le bas ligne droite
+            for piegee in [(190,580,1),(290,580,1),(390,580,1),(490,580,1),(590,580,1),(670,580,1)]:
+                piege.Piege(self,*piegee)
+
+            #piege vers le haut ligne droite
+            for piegee in [(100,730,4),(200,730,4),(300,730,4),(400,730,4),(500,730,4),(600,730,4),(700,730,4),(770,730,4)]:
+                piege.Piege(self,*piegee)
+
+            #piege vers la gauche montée
+            for piegee in [(868,630,2),(868,530,2),(868,430,2),(868,330,2),(868,230,2),]:
+                piege.Piege(self,*piegee)
+
+            #pieges vers la droite montée
+            for piegee in [(770,470,3),(770,400,3),(770,370,3),]:
+                piege.Piege(self,*piegee)
+
+            #piege vers le bas petite ligne droite
+            for piegee in [(768,230,1),(668,230,1),(568,230,1),]:
+                piege.Piege(self,*piegee)
+
+            #piege vers le haut petite ligne droite
+            for piegee in [(670,370,4),(570,370,4)]:
+                piege.Piege(self,*piegee)
+
+            #plateformes descente gauche
+            for plate in [(70,150,2),(70, 250,2),(70, 350,2),(70, 450,2),(70, 550,2),(70, 650,2)]:
+                plat.Plat(self,*plate)
+
+            #plateformes descente droite
+            for plate in [(195,-30,2),(195,70,2),(195,170,2),(195,270,2),(195,370,2),(195,470,2)]:
+                plat.Plat(self,*plate)
+
+            #plateformes ligne droite haut
+            for plate in [(200,550,3),(300,550,3),(400,550,3),(500,550,3),(600,550,3),(670,550,3),]:
+                plat.Plat(self,*plate)
+
+            #plateformes ligne droite bas
+            for plate in [(100,740),(200,740),(300,740),(400,740),(500,740),(600,740),(700,740),(800,740)]:
+                plat.Plat(self,*plate)
+
+            #plateformes montée droite
+            for plate in [(878,640,2),(878,540,2),(878,440,2),(878,340,2),(878,240,2),(878,220,2)]:
+                plat.Plat(self,*plate)
+
+            #plateformes montée gauche
+            for plate in [(740,470,2),(740,380,2)]:
+                plat.Plat(self,*plate)
+
+            #le reste des plateformes osef de les décrire de toute façon personne lit ça
+            for plate in [(670,380),(570,380), (768,200,3),(668,200,3), (568,200,3)]:
+                plat.Plat(self,*plate)
+
+            for gravv in [(100,150),(100,246),(100,342),(100,438),(100,534),(100,630),(196,630),(292,630),(388,630),(484,630),(580,630),(676,630),(772,630),(772,534),(772,438),(772,342),(772,246),(676,246),(580,246)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,0, 40)
+            for checkk in []:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(400,500)]:
+                goal.Goal(self,*finniv)
+
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(40,20)
+
+        elif niveau == 11:
+
+            background.Background(self,"images/backgrounds/background_1.png")
+
+
+            for plate in [(0,750),(950,750)]:
+                plat.Plat(self,*plate)
+
+
+            for gravv in [(-46,114), (-46,210), (-46,306), (-46,402), (-46,498), (50,114),(146,114), (50,306),(50,500),(144,500), (288,114),(288,302),(288,396),(288,490),(288,208), (384,208),(432,304),(480,400),(576,496),(576,400),(576,304),(576,208),(576,112),(720,112),(720,208),(720,304),(720,400),(720,496),(816,112),(816,496),(912,208),(912,400),(960,304)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,0,650)
+            for checkk in []:
+                checkpoint.Check(self,*checkk)
+
+            for finniv in[(950,700)]:
+                goal.Goal(self,*finniv)
+
+            self.joueur = perso.Perso(self)
+            self.joueur.pos = vec(40,20)
