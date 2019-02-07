@@ -24,7 +24,6 @@ elif niveau == 1:
 
 elif niveau == 1:
     background.Background(self,"images/backgrounds/background_2.jpg")
-    self.joueur.pos = vec(40,150)
     for plate in [(0, 150)]:
         plat.Plat(self,*plate)
 
@@ -97,3 +96,6 @@ elif niveau == 1:
 
     for finniv in[(400,500)]:
         goal.Goal(self,*finniv)
+
+    self.joueur = perso.Perso(self)
+    self.joueur.pos = vec(40,20)
