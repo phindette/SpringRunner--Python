@@ -344,6 +344,8 @@ class Application :
         pygame.display.set_icon(icon)
         self.image=pygame.Surface((surfaceW, surfaceH))
         self.image = pygame.image.load("images/backgrounds/background_1.png").convert_alpha()
+        pygame.mixer.music.load("soundtrack/Actipognon_test_1.mp3")
+        pygame.mixer.music.play(10)
         # Groupe de sprites utilisé pour l'affichage
         self.les_sprites = pygame.sprite.Group()
         self.statut = True
