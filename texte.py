@@ -2,7 +2,7 @@ import pygame
 from constantes import *
 
 class Texte(pygame.sprite.Sprite):
-    def __init__(self,game,texte,x=LARGEURFENETRE -100,y = 0,l=100,h=50,src = True):
+    def __init__(self,game,texte,x=LARGEURFENETRE -100,y = 0,l=100,h=50,src = True,centre = True):
         # Call the parent class (Sprite) constructor
         pygame.sprite.Sprite.__init__(self)
         self.texte = texte
@@ -23,7 +23,10 @@ class Texte(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         W = self.textSurf.get_width()
         H = self.textSurf.get_height()
-        self.image.blit(self.textSurf, [W/2,  H/2])
+        if centre:
+            self.image.blit(self.textSurf, [W/2,  H/2])
+        else:
+            self.image.blit(self.textSurf, [W-W,  H/2])
         self.rect.x = x
         self.rect.y = y
     def clear(self):
