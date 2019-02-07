@@ -133,7 +133,7 @@ class Regles :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
         self.image=pygame.Surface((surfaceW, surfaceH))
-        self.image = pygame.image.load("background_menu.jpg").convert_alpha()
+        self.image = pygame.image.load("images/backgrounds/background_menu.jpg").convert_alpha()
         #regles.fond = (0, 0, 0)
 
         self._couleurTexte = (227,128,75)
@@ -154,6 +154,7 @@ class Regles :
         Pour cela vous devez déplacer votre personnage de plateformes en plateformes en évitant les piques.
         Si vous mourrez, vous apparaissez à nouveau au dernier checkpoint.""", True, self._couleurTexte)
     def update(self, events) :
+        self._fenetre.blit(self.image,(0,0))
         self._fenetre.blit(self.texte, self.rectTexte)
         for event in events :
             if event.type == self._CLIGNOTER :
@@ -174,6 +175,8 @@ class Application :
         self.fond = (COULEURMENU)
 
         self.fenetre = pygame.display.set_mode((surfaceW,surfaceH))
+        self.image=pygame.Surface((surfaceW, surfaceH))
+        self.image = pygame.image.load("images/backgrounds/background_1.png").convert_alpha()
         # Groupe de sprites utilisé pour l'affichage
         self.groupeGlobal = pygame.sprite.Group()
         self.statut = True
@@ -221,6 +224,7 @@ class Application :
                 return
 
         self.fenetre.fill(self.fond)
+        self.fenetre.blit(self.image,(0,0))
         self.ecran.update(events)
         self.groupeGlobal.update()
         self.groupeGlobal.draw(self.fenetre)
