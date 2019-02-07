@@ -28,6 +28,7 @@ class Perso(pygame.sprite.Sprite):
         self.check = None
         self.gravite = False
         self.changeM = False
+        self.zeroGrav = False
 
     def charger_images(self):
         #charger les images (pour l'instant que l'image de base)
@@ -89,46 +90,42 @@ class Perso(pygame.sprite.Sprite):
             self.image = self.spritesCollection[5][self.index]
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_a]:
-            self.gravite = True
+        # if keys[pygame.K_a]:
+        #     self.gravite = True
+        #
+        # else :
+        #     self.gravite = False
+        #     self.changeM = False
+        self.acc = vec(0,0.80)
+        if keys[pygame.K_z]:
+            if self.zeroGrav:
+                self.acc = vec(0,-0.8)
 
-        else :
-            self.gravite = False
-            self.changeM = False
-            self.acc = vec(0,0.80)
-        if keys[pygame.K_e]:
-            self.acc = vec(0,-0.8)
-        if self.changeM:
-            if keys[pygame.K_z]:
-                self.pos.y = self.pos.y -2
-            if keys[pygame.K_s]:
-                self.pos.y = self.pos.y +2
-        else:
-            if keys[pygame.K_q]:
-                if self.vel.y < -0.0:
-                    self.acc.x = -1
-                    self.animation = "JL"
-                else:
-                    self.acc.x = -1
-                    self.animation = "L"
-            elif keys[pygame.K_d]:
-                if self.vel.y < -0.0:
-                    self.acc.x = 1
-                    self.animation = "JR"
-                else:
-                    self.acc.x = 1
-                    self.animation = "R"
-            elif self.vel.y < -0.0:
-                if self.animation == "R" or self.animation == "SR" or self.animation == "JR":
-                    self.animation = "JR"
-                elif self.animation == "L" or self.animation == "SL" or self.animation == "JL":
-                    self.animation = "JL"
-
+        if keys[pygame.K_q]:
+            if self.vel.y < -0.0:
+                self.acc.x = -1
+                self.animation = "JL"
             else:
-                if self.animation == "R" or self.animation == "SR" or self.animation == "JR":
-                    self.animation = "SR"
-                elif self.animation == "L" or self.animation == "SL" or self.animation == "JL":
-                    self.animation = "SL"
+                self.acc.x = -1
+                self.animation = "L"
+        elif keys[pygame.K_d]:
+            if self.vel.y < -0.0:
+                self.acc.x = 1
+                self.animation = "JR"
+            else:
+                self.acc.x = 1
+                self.animation = "R"
+        elif self.vel.y < -0.0:
+            if self.animation == "R" or self.animation == "SR" or self.animation == "JR":
+                self.animation = "JR"
+            elif self.animation == "L" or self.animation == "SL" or self.animation == "JL":
+                self.animation = "JL"
+
+        else:
+            if self.animation == "R" or self.animation == "SR" or self.animation == "JR":
+                self.animation = "SR"
+            elif self.animation == "L" or self.animation == "SL" or self.animation == "JL":
+                self.animation = "SL"
 
         # apply friction
         self.acc.x += self.vel.x * -0.12

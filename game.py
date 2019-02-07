@@ -11,7 +11,7 @@ import goal
 import texte
 import background
 import fin
-
+import plateformeAntiGrav
 
 class Game:
     def __init__(self):
@@ -23,6 +23,7 @@ class Game:
         self.enCours = True;
         pygame.mixer.music.load("soundtrack/Actipognon_test_2.mp3")
         pygame.mixer.music.play()
+        self.timer = 0
 
     def nouvellePartie(self):
         #Débute une nouvelle nouvellePartie
@@ -32,7 +33,7 @@ class Game:
         self.pieges = pygame.sprite.Group()
         self.check = pygame.sprite.Group()
         self.goals = pygame.sprite.Group()
-
+        self.plateformegGravite = pygame.sprite.Group()
 
 
         #MISE EN PLACE DES SPRITE POUR LE NIVEAU 1
@@ -77,10 +78,13 @@ class Game:
             else :
                 self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
             print(self.seconds)
-            texte.Texte(self,self.seconds,LARGEURFENETRE-250)
+            if self.timer != 0:
+                print("ta petite maman")
+                self.timer.clear()
+            self.timer = texte.Texte(self,self.seconds,LARGEURFENETRE-250)
 
         #VERIF DE LA FIN DU JEU
-        if((pygame.time.get_ticks()-0)/1000 >= 5):
+        if((pygame.time.get_ticks()-0)/1000 >= 180):
             self.en_jeu = False
             self.fin = fin.Application()
             #fin = fin.Application()
@@ -207,6 +211,12 @@ class Game:
             self.niveau += 1
             self.initNiveau(self.niveau)
 
+        #VERIF POUR LA GRAVITE
+        hitGrav = pygame.sprite.spritecollide(self.joueur,self.plateformegGravite,False)
+        if hitGrav:
+            self.joueur.zeroGrav = True
+        else :
+            self.joueur.zeroGrav = False
 
 
     def events(self):
@@ -260,6 +270,8 @@ class Game:
             for finniv in[(400,718)]:
                 goal.Goal(self,*finniv)
 
+            for gravv in [(350,500),(350,600),(350,700),(350,700)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
 
 
         elif niveau == 2:
