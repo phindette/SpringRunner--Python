@@ -1,0 +1,19 @@
+#Je propose ce niveau pour la fin de notre jeu
+
+elif niveau == 1:
+          background.Background(self,"images/backgrounds/background_1.png")
+          self.joueur.pos = vec(30,650)
+
+          for plate in [(0,750),(950,750)]:
+              plat.Plat(self,*plate)
+
+
+          for gravv in [(-46,114), (-46,210), (-46,306), (-46,402), (-46,498), (50,114),(146,114), (50,306),(50,500),(144,500), (288,114),(288,302),(288,396),(288,490),(288,208), (384,208),(432,304),(480,400),(576,496),(576,400),(576,304),(576,208),(576,112),(720,112),(720,208),(720,304),(720,400),(720,496),(816,112),(816,496),(912,208),(912,400),(960,304)] :
+              plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+          self.checkpointCourant = checkpoint.Check(self,0,650)
+          for checkk in []:
+              checkpoint.Check(self,*checkk)
+
+          for finniv in[(950,700)]:
+              goal.Goal(self,*finniv)
