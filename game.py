@@ -159,22 +159,23 @@ class Game:
                             self.joueur.vel.y = 0 #supprime la vélocité du saut du joueur
                             self.joueur.sauter = False #le joueur n'est plus en train de sauter
                         if self.joueur.pos.x < platGauche.rect.left +20 and self.joueur.pos.y > platGauche.rect.top:
-                            self.joueur.pos.x = self.joue                self.seconds = '0' + str(minutes) + ':' + '0'+ str(ingametimer)
-            else :
+                            self.joueur.pos.x = self.joue
+
+        '''    else :
                 self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
             print(self.seconds)
             if self.timer != 0:
                 print("ta petite maman")
                 self.timer.clear()
             self.timer = texte.Texte(self,self.seconds,LARGEURFENETRE-250)
-ur.pos.x - 20 #positionne le joueur contre la partie gauche de la plateforme
+            ur.pos.x - 20 #positionne le joueur contre la partie gauche de la plateforme
                             self.joueur.acc.x = 0
                             self.joueur.vel.x = 0
-                            self.joueur.sauter = False
+                            self.joueur.sauter = False""
 
 
 
-                    '''if hit.rect.left > lowest.rect.left:
+                    if hit.rect.left > lowest.rect.left:
                         lowest = hit
                     if hit.rect.bottom > lowest.rect.bottom:
                         lowest = hit
