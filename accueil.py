@@ -133,7 +133,7 @@ class Regles :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
         self.image=pygame.Surface((surfaceW, surfaceH))
-        self.image = pygame.image.load("images/backgrounds/background_regles-ConvertImage2.jpg").convert_alpha()
+        self.image = pygame.image.load("images/backgrounds/background_regles-texte.jpg").convert_alpha()
         #regles.fond = (0, 0, 0)
 
         self._couleurTexte = (227,128,75)
