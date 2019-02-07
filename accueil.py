@@ -175,8 +175,11 @@ class Regles :
 
 class Credits :
     def __init__(self, regles, *groupes):
-
         self._fenetre = regles.fenetre
+
+
+
+
         self.image=pygame.Surface((surfaceW, surfaceH))
         self.image = pygame.image.load("images/backgrounds/background_credits.jpg").convert_alpha()
 
