@@ -133,8 +133,7 @@ class Jeu :
 class Regles :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
-        self.image=pygame.Surface((surfaceW, surfaceH))
-        self.image = pygame.image.load("images/backgrounds/background_regles-texte.jpg").convert_alpha()
+
         font = pygame.font.SysFont('Helvetica', 24, bold=True)
 
         items = (
