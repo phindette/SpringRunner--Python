@@ -30,7 +30,7 @@ class Fin :
         self._boutons = []
         #champ de saisie:
         self.boxInfo = inputbox.InputBox(x-250,y,250,50,self,"Entrez votre pseudo :")
-        self.box = inputbox.InputBox(x,y,200,50,self)
+        self.box = inputbox.InputBox(x,y,200,50,self,'',True)
         clock = pygame.time.Clock()
         self.done = False
         while not self.done:
