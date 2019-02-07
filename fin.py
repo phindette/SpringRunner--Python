@@ -265,19 +265,19 @@ class Regles  :
             l.append(ligne)
         for x in range (1,8):
             if x == 1:
-                self.l1 = texte.Texte(regles,str(x)+"er :"+" "+l[x-1],LARGEURFENETRE/2 -200,100,400,50,False)
+                self.l1 = texte.Texte(regles,str(x)+"er :"+" "+l[x-1],LARGEURFENETRE/2 -200,100,400,50,False,False)
             if x == 2:
-                self.l2 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,200,400,50,False)
+                self.l2 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,200,400,50,False,False)
             if x == 3:
-                self.l3 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,300,400,50,False)
+                self.l3 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,300,400,50,False,False)
             if x == 4:
-                self.l4 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,400,400,50,False)
+                self.l4 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,400,400,50,False,False)
             if x == 5:
-                self.l5 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,500,400,50,False)
+                self.l5 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,500,400,50,False,False)
             if x == 6:
-                self.l6 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,600,400,50,False)
+                self.l6 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,600,400,50,False,False)
             if x == 7:
-                self.l7 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,700,400,50,False)
+                self.l7 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,700,400,50,False,False)
         f.close()
 
 
