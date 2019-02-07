@@ -10,6 +10,7 @@ import checkpoint
 import goal
 import texte
 import background
+import fin
 
 
 class Game:
@@ -57,7 +58,6 @@ class Game:
     def update(self):
         #Mise à jour de la boucle du jeu
         self.les_sprites.update()
-
         #MISE EN PLACE DU TIMER
         if((pygame.time.get_ticks()-0)/1000)% 1 > 0.94 :
             minutes = 0
@@ -80,8 +80,11 @@ class Game:
             texte.Texte(self,self.seconds,LARGEURFENETRE-200)
 
         #VERIF DE LA FIN DU JEU
-        if((pygame.time.get_ticks()-0)/1000 >= 180):
+        if((pygame.time.get_ticks()-0)/1000 >= 5):
             self.en_jeu = False
+            self.fin = fin.Application()
+            #fin = fin.Application()
+            self.fin.startFin()
 
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
         hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)

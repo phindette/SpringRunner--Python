@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 da 11
 jack 2
 mickael 1
@@ -8,15 +7,4 @@ thierry 1
 thierry 1
 thierry 1
 thpute 1
-=======
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
->>>>>>> cba202ea23f6d30462be4ed70f56387a6bd70c14
+ 11

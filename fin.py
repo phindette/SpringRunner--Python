@@ -284,14 +284,12 @@ class Application :
         self.les_sprites.draw(self.fenetre)
         pygame.display.update()
 
+    def startFin(self):
+        app = Application()
+        app.menu()
+        clock = pygame.time.Clock()
+        while app.statut :
+            app.update()
+            clock.tick(30)
 
-app = Application()
-app.menu()
-
-clock = pygame.time.Clock()
-
-while app.statut :
-    app.update()
-    clock.tick(30)
-
-pygame.quit()
+        pygame.quit()
