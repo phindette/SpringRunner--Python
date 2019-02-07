@@ -1,0 +1,19 @@
+niv 1 :
+if niveau == 1:
+    background.Background(self,"images/backgrounds/background_2.jpg")
+    self.joueur.pos = vec(20,HAUTEURFENETRE-80)
+    for plate in [(0, 728),(150,650),(700,300),(900,300)]:
+        plat.Plat(self,*plate)
+
+    for piegee in []:
+        piege.Piege(self,*piegee)
+
+    for gravv in [(300,500),(300,400),(300,300),(400,500),(400,400),(400,300)] :
+        plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+    self.checkpointCourant = checkpoint.Check(self,50, 618)
+    for checkk in []:
+        checkpoint.Check(self,*checkk)
+
+    for finniv in[(950,250)]:
+        goal.Goal(self,*finniv)

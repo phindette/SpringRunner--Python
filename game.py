@@ -12,6 +12,7 @@ import texte
 import background
 import fin
 import plateformeAntiGrav
+vec = pygame.math.Vector2
 
 class Game:
     def __init__(self):
@@ -256,34 +257,39 @@ class Game:
 
         if niveau == 1:
             background.Background(self,"images/backgrounds/background_2.jpg")
-
-            for plate in [(0, 728),(512, 384),(125, 578),(350, 200),(175, 100),(0,438)]:
+            self.joueur.pos = vec(20,HAUTEURFENETRE-80)
+            for plate in [(0, 728),(150,650),(700,300),(900,300)]:
                 plat.Plat(self,*plate)
 
-            for piegee in [(0, 468)]:
+            for piegee in []:
                 piege.Piege(self,*piegee)
 
+            for gravv in [(300,500),(300,400),(300,300),(400,500),(400,400),(400,300)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
             self.checkpointCourant = checkpoint.Check(self,50, 618)
-            for checkk in [(200, 468)]:
+            for checkk in []:
                 checkpoint.Check(self,*checkk)
 
-            for finniv in[(400,718)]:
+            for finniv in[(950,250)]:
                 goal.Goal(self,*finniv)
-
-            for gravv in [(350,500),(350,600),(350,700),(350,700)] :
-                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
 
 
         elif niveau == 2:
             background.Background(self,"images/backgrounds/background_1.png")
-            for plate in [(0, 728),(512 , 384 ),(125, 578),(350, 200),(175, 100),(0,438)]:
+            self.joueur.pos = vec(40,150)
+            for plate in [(0, 150),(175 , 0),(175 , 30),(175 , 60),(175 , 90),(175 , 120),(175 , 150),(175 , 180)
+            ,(175 , 210),(175 , 240)]:
                 plat.Plat(self,*plate)
 
-            for piegee in [(0, 468)]:
+            for piegee in [(0,600)]:
                 piege.Piege(self,*piegee)
 
-            self.checkpointCourant = checkpoint.Check(self,50, 618)
-            for checkk in [(200, 468)]:
+            for gravv in [(300,500),(300,400),(300,300),(400,500),(400,400),(400,300)] :
+                plateformeAntiGrav.PlateformeAntiGrav(self,*gravv)
+
+            self.checkpointCourant = checkpoint.Check(self,0, 40)
+            for checkk in []:
                 checkpoint.Check(self,*checkk)
 
             for finniv in[(600,718)]:
