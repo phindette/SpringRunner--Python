@@ -18,7 +18,7 @@ class Texte(pygame.sprite.Sprite):
             self.image = pygame.Surface([l,h], pygame.SRCALPHA, 32)
         else :
             self.image = pygame.Surface([l,h], 32)
-            self.image.fill((255,0,0))
+            self.image.fill((0, 200, 0))
         #self.image = self.image.convert_alpha()
         self.rect = self.image.get_rect()
         W = self.textSurf.get_width()
