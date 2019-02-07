@@ -340,6 +340,8 @@ class Application :
         self.fond = (COULEURMENU)
         self.textes = pygame.sprite.Group()
         self.fenetre = pygame.display.set_mode((surfaceW,surfaceH))
+        icon = pygame.image.load("images/Spring_Runner_Cover_Art.png").convert_alpha()
+        pygame.display.set_icon(icon)
         self.image=pygame.Surface((surfaceW, surfaceH))
         self.image = pygame.image.load("images/backgrounds/background_1.png").convert_alpha()
         # Groupe de sprites utilisé pour l'affichage
