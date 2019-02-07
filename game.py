@@ -282,7 +282,7 @@ class Game:
             for finniv in[(950,250)]:
                 goal.Goal(self,*finniv)
             self.joueur = perso.Perso(self)
-            self.joueur.pos = vec(40,20)
+            self.joueur.pos = vec(40,700)
 
         elif niveau == 2: #VRAI NIVEAU 2
             background.Background(self,"images/backgrounds/background_1.png")
