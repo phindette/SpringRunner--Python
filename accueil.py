@@ -135,40 +135,52 @@ class Regles :
         self._fenetre = regles.fenetre
         self.image=pygame.Surface((surfaceW, surfaceH))
         self.image = pygame.image.load("images/backgrounds/background_regles-texte.jpg").convert_alpha()
-        #regles.fond = (0, 0, 0)
+        font = pygame.font.SysFont('Helvetica', 24, bold=True)
 
-        #self._couleurTexte = (227,128,75)
+        items = (
+            ('RETOUR', regles.retour)
+        )
+        x = surfaceW/2
+        y = surfaceH/2 -200
+        self._boutons = []
+        mb = MenuBouton('RETOUR',(255,0,0),font,150,50,200,50,regles.retour)
+        self._boutons.append(mb)
+        y += 120
+        for groupe in groupes :
+            groupe.add(mb)
 
-        # self._font = pygame.font.SysFont('Helvetica', 36, bold=True)
-        # self.creerTexte()
-        # self.rectTexte = self.texte.get_rect()
-        # self.rectTexte.center = (surfaceW/2, surfaceH/2)
 
-        #Creation bouton "Retour Menu"
-        # self.rect = pygame.draw.rect(self.image, (150,150,150), (10,10,100,50))
-        # self.rend = self._font.render("Retour",True,(120,120,120))
-        # self.rect = self.rend.get_rect()
-        # self._fenetre.blit(self.rend,(10,110))
+        self.image=pygame.Surface((surfaceW, surfaceH))
+        self.image = pygame.image.load("images/backgrounds/background_regles-texte.jpg").convert_alpha()
 
         pygame.display.update()
-        # Création d'un event
+
         self._CLIGNOTER = pygame.USEREVENT + 1
         pygame.time.set_timer(self._CLIGNOTER, 80)
 
-    # def creerTexte(self) :
-    #     #fichier = open("regles.txt", "r")
-    #     self._font = pygame.font.SysFont('Helvetica', 10, bold=True)
-    #     self.texte= self._font.render(""" """, True, self._couleurTexte)
-
-
     def update(self, events) :
         self._fenetre.blit(self.image,(0,0))
-        #self._fenetre.blit(self.texte, self.rectTexte) #Affiche le texte
-        #Boucle qui créer le texte
-        # for event in events :
-        #     if event.type == self._CLIGNOTER :
-        #         self.creerTexte()
-        #         break
+        clicGauche, *_ = pygame.mouse.get_pressed()
+        posPointeur = pygame.mouse.get_pos()
+        for bouton in self._boutons :
+            # Si le pointeur souris est au-dessus d'un bouton
+            if bouton.rect.collidepoint(*posPointeur) :
+                # Changement du curseur par un quelconque
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+                # Changement de la couleur du bouton
+                bouton.dessiner((0, 200, 200))
+                # Si le clic gauche a été pressé
+                if clicGauche :
+                    # Appel de la fonction du bouton
+                    bouton.executerCommande()
+                break
+            else :
+                # Le pointeur n'est pas au-dessus du bouton
+                bouton.dessiner((255,0,0))
+        else :
+            # Le pointeur n'est pas au-dessus d'un des boutons
+            # initialisation au pointeur par défaut
+            pygame.mouse.set_cursor(*pygame.cursors.arrow)
 
     def detruire(self) :
             pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
@@ -176,8 +188,19 @@ class Regles :
 class Credits :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
+        font = pygame.font.SysFont('Helvetica', 24, bold=True)
 
-
+        items = (
+            ('RETOUR', regles.retour)
+        )
+        x = surfaceW/2
+        y = surfaceH/2 -200
+        self._boutons = []
+        mb = MenuBouton('RETOUR',(255,0,0),font,150,50,200,50,regles.retour)
+        self._boutons.append(mb)
+        y += 120
+        for groupe in groupes :
+            groupe.add(mb)
 
 
         self.image=pygame.Surface((surfaceW, surfaceH))
@@ -190,6 +213,27 @@ class Credits :
 
     def update(self, events) :
         self._fenetre.blit(self.image,(0,0))
+        clicGauche, *_ = pygame.mouse.get_pressed()
+        posPointeur = pygame.mouse.get_pos()
+        for bouton in self._boutons :
+            # Si le pointeur souris est au-dessus d'un bouton
+            if bouton.rect.collidepoint(*posPointeur) :
+                # Changement du curseur par un quelconque
+                pygame.mouse.set_cursor(*pygame.cursors.tri_left)
+                # Changement de la couleur du bouton
+                bouton.dessiner((0, 200, 200))
+                # Si le clic gauche a été pressé
+                if clicGauche :
+                    # Appel de la fonction du bouton
+                    bouton.executerCommande()
+                break
+            else :
+                # Le pointeur n'est pas au-dessus du bouton
+                bouton.dessiner((255,0,0))
+        else :
+            # Le pointeur n'est pas au-dessus d'un des boutons
+            # initialisation au pointeur par défaut
+            pygame.mouse.set_cursor(*pygame.cursors.arrow)
 
     def detruire(self) :
             pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
@@ -229,7 +273,9 @@ class Application :
         g = game.Game()
 
         g.nouvellePartie()
-
+    def retour(self):
+        self._initialiser()
+        self.ecran = Menu(self, self.groupeGlobal)
 
     def regles(self):
         #Affichage des règles
