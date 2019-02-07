@@ -89,7 +89,7 @@ class MenuBouton(pygame.sprite.Sprite) :
         self.image.blit(self.texte, self.rectTexte)
 
     def executerCommande(self) :
-        # Appel de la commande du bouton
+        # el de la commande du bouton
         self._commande()
 
 
@@ -194,12 +194,11 @@ class Application :
     def jeu(self) :
         # Affichage du jeu
         self._initialiser()
-        print("tamer")
         #self.ecran = Jeu(self, self.groupeGlobal)
         g = game.Game()
-        while g.enCours:
-            g.nouvellePartie()
-        pygame.quit()
+
+        g.nouvellePartie()
+
 
     def regles(self):
         #Affichage des règles

@@ -72,13 +72,16 @@ class Game:
                 minutes = 1
                 ingametimer -= 60
 
-            #if round(((pygame.time.get_ticks()-0)/1000)) <= 10 :
-            self.seconds = '0' + str(minutes) + ':' +  str(ingametimer)
+            if ingametimer < 10 :
+                self.seconds = '0' + str(minutes) + ':' + '0'+ str(ingametimer)
+            else :
+                self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
             print(self.seconds)
-            #else :
-            #    self.seconds = '0' + str(minutes) + ':' +'0' +  str(ingametimer)
             texte.Texte(self,self.seconds,LARGEURFENETRE-200)
 
+        #VERIF DE LA FIN DU JEU
+        if((pygame.time.get_ticks()-0)/1000 >= 180):
+            self.en_jeu = False
 
         #Vérifie que le joueur est sur une plateforme (quand il tombe)
         hits = pygame.sprite.spritecollide(self.joueur,self.plateformes,False)
