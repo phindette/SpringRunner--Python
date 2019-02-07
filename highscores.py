@@ -25,7 +25,7 @@ class Highscores:
                     li[1][0]=str(score)
                     for y in reversed(range(contenu.index(x)+1,len(contenu)-1)):
                         contenu[y]=contenu[y-1]
-                    contenu[contenu.index(x)]=li[0][0]+'score :'+li[1][0]+' points\n'
+                    contenu[contenu.index(x)]=li[0][0]+'          score :'+li[1][0]+' points\n'
                     break
             f.close()
             f=open("highscores.txt","w+")
