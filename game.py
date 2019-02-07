@@ -77,7 +77,7 @@ class Game:
             else :
                 self.seconds = '0' + str(minutes) + ':'  +  str(ingametimer)
             print(self.seconds)
-            texte.Texte(self,self.seconds,LARGEURFENETRE-200)
+            texte.Texte(self,self.seconds,LARGEURFENETRE-250)
 
         #VERIF DE LA FIN DU JEU
         if((pygame.time.get_ticks()-0)/1000 >= 5):
@@ -241,7 +241,7 @@ class Game:
         #MISE EN PLACE DU NOMBRE DE POINTS
         pts = self.niveau
         stringpts = "Points : " + str(self.niveau)
-        self.pts = texte.Texte(self,stringpts,LARGEURFENETRE-100)
+        self.pts = texte.Texte(self,stringpts,LARGEURFENETRE-150,0,150)
 
 
         if niveau == 1:

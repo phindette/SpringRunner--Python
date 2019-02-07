@@ -2,7 +2,7 @@ import pygame
 from constantes import *
 
 class Texte(pygame.sprite.Sprite):
-    def __init__(self,game,texte,x=LARGEURFENETRE -100,y = 0,l=100,h=100):
+    def __init__(self,game,texte,x=LARGEURFENETRE -100,y = 0,l=100,h=50):
         # Call the parent class (Sprite) constructor
         pygame.sprite.Sprite.__init__(self)
         self.texte = texte
