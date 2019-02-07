@@ -1,6 +1,7 @@
 Bienvenue dans SpringRunner, le tout nouveau jeu de plateforme !
 Le but du jeu est d'arriver le plus loin possible dans les différents niveaux en 3 minutes.
 Pour cela vous devez  vous déplacer de plateformes en plateformes en évitant les piques.
+Atteignez la flamme rouge pour passer au niveau suivant !
 Si vous mourrez, vous apparaissez à nouveau au dernier checkpoint atteint.
 
 Commandes : D       : se déplacer à droite
