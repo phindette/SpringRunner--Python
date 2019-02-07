@@ -133,7 +133,7 @@ class Regles :
     def __init__(self, regles, *groupes):
         self._fenetre = regles.fenetre
         self.image=pygame.Surface((surfaceW, surfaceH))
-        self.image = pygame.image.load("images/backgrounds/background_regles.jpg").convert_alpha()
+        self.image = pygame.image.load("images/backgrounds/background_regles-ConvertImage2.jpg").convert_alpha()
         #regles.fond = (0, 0, 0)
 
         self._couleurTexte = (227,128,75)
@@ -149,10 +149,7 @@ class Regles :
     def creerTexte(self) :
         #fichier = open("regles.txt", "r")
         self._font = pygame.font.SysFont('Helvetica', 10, bold=True)
-        self.texte= self._font.render("""Bienvenue dans SpringRunner, le tout nouveau jeu de plateforme !\n
-        Le but du jeu est d'arriver le plus loin possible dans les différents niveaux en 3 minutes.
-        Pour cela vous devez déplacer votre personnage de plateformes en plateformes en évitant les piques.
-        Si vous mourrez, vous apparaissez à nouveau au dernier checkpoint.""", True, self._couleurTexte)
+        self.texte= self._font.render(""" """, True, self._couleurTexte)
     def update(self, events) :
         self._fenetre.blit(self.image,(0,0))
         self._fenetre.blit(self.texte, self.rectTexte)
