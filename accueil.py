@@ -16,11 +16,12 @@ class Menu :
         # noms des menus et commandes associées
         items = (
             ('JOUER', application.jeu),
-            ('REGLES', application.regles),
+            ('RÈGLES', application.regles),
+            ('CREDITS', application.credits),
             ('QUITTER', application.quitter)
         )
         x = surfaceW/2
-        y = surfaceH/2 -100
+        y = surfaceH/2 -200
         self._boutons = []
         for texte, cmd in items :
             mb = MenuBouton(
@@ -136,32 +137,62 @@ class Regles :
         self.image = pygame.image.load("images/backgrounds/background_regles-texte.jpg").convert_alpha()
         #regles.fond = (0, 0, 0)
 
-        self._couleurTexte = (227,128,75)
+        #self._couleurTexte = (227,128,75)
 
-        self._font = pygame.font.SysFont('Helvetica', 36, bold=True)
-        self.creerTexte()
-        self.rectTexte = self.texte.get_rect()
-        self.rectTexte.center = (surfaceW/2, surfaceH/2)
+        # self._font = pygame.font.SysFont('Helvetica', 36, bold=True)
+        # self.creerTexte()
+        # self.rectTexte = self.texte.get_rect()
+        # self.rectTexte.center = (surfaceW/2, surfaceH/2)
+
+        #Creation bouton "Retour Menu"
+        # self.rect = pygame.draw.rect(self.image, (150,150,150), (10,10,100,50))
+        # self.rend = self._font.render("Retour",True,(120,120,120))
+        # self.rect = self.rend.get_rect()
+        # self._fenetre.blit(self.rend,(10,110))
+
+        pygame.display.update()
         # Création d'un event
         self._CLIGNOTER = pygame.USEREVENT + 1
         pygame.time.set_timer(self._CLIGNOTER, 80)
 
-    def creerTexte(self) :
-        #fichier = open("regles.txt", "r")
-        self._font = pygame.font.SysFont('Helvetica', 10, bold=True)
-        self.texte= self._font.render(""" """, True, self._couleurTexte)
+    # def creerTexte(self) :
+    #     #fichier = open("regles.txt", "r")
+    #     self._font = pygame.font.SysFont('Helvetica', 10, bold=True)
+    #     self.texte= self._font.render(""" """, True, self._couleurTexte)
+
+
     def update(self, events) :
         self._fenetre.blit(self.image,(0,0))
-        self._fenetre.blit(self.texte, self.rectTexte)
-        for event in events :
-            if event.type == self._CLIGNOTER :
-                self.creerTexte()
-                break
+        #self._fenetre.blit(self.texte, self.rectTexte) #Affiche le texte
+        #Boucle qui créer le texte
+        # for event in events :
+        #     if event.type == self._CLIGNOTER :
+        #         self.creerTexte()
+        #         break
 
     def detruire(self) :
             pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
 
+class Credits :
+    def __init__(self, regles, *groupes):
+        self._fenetre = regles.fenetre
 
+
+
+
+        self.image=pygame.Surface((surfaceW, surfaceH))
+        self.image = pygame.image.load("images/backgrounds/background_credits.jpg").convert_alpha()
+
+        pygame.display.update()
+
+        self._CLIGNOTER = pygame.USEREVENT + 1
+        pygame.time.set_timer(self._CLIGNOTER, 80)
+
+    def update(self, events) :
+        self._fenetre.blit(self.image,(0,0))
+
+    def detruire(self) :
+            pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
 
 class Application :
     """ Classe maîtresse gérant les différentes interfaces du jeu """
@@ -204,10 +235,16 @@ class Application :
         #Affichage des règles
         self._initialiser()
         self.ecran = Regles(self, self.groupeGlobal)
+
+
         #pygame.init()
         #self.ecran = pygame.display.set_mode((surfaceW,surfaceH))
         #pygame.display.set_caption("Règles")
         #self.clock = pygame.time.Clock()
+
+    def credits(self):
+        self._initialiser()
+        self.ecran = Credits(self, self.groupeGlobal)
 
     def quitter(self) :
         self.statut = False

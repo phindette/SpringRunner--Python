@@ -1,10 +1,10 @@
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
-empty               score :0 points
+da 11
+jack 2
+mickael 1
+margoulin 1
+thierry 1
+thierry 1
+thierry 1
+thierry 1
+thpute 1
+ 11
