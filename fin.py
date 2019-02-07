@@ -186,21 +186,22 @@ class Regles  :
         for ligne in f:
             ligne = ligne.replace('\n','')
             l.append(ligne)
-        for x in range (1,len(l)):
+        for x in range (1,8):
             if x == 1:
-                self.l1 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,100,400)
+                self.l1 = texte.Texte(regles,str(x)+"er :"+" "+l[x-1],LARGEURFENETRE/2 -200,100,400,50,False)
             if x == 2:
-                self.l2 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,200,400)
+                self.l2 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,200,400,50,False)
             if x == 3:
-                self.l3 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,300,400)
+                self.l3 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,300,400,50,False)
             if x == 4:
-                self.l4 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,400,400)
+                self.l4 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,400,400,50,False)
             if x == 5:
-                self.l5 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,500,400)
+                self.l5 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,500,400,50,False)
             if x == 6:
-                self.l6 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,600,400)
+                self.l6 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,600,400,50,False)
             if x == 7:
-                self.l7 = texte.Texte(regles,str(x)+" "+l[x-1],LARGEURFENETRE/2 -200,700,400)
+                self.l7 = texte.Texte(regles,str(x)+"ème :"+" "+l[x-1],LARGEURFENETRE/2 -200,700,400,50,False)
+        f.close()
 
 
 
@@ -212,10 +213,6 @@ class Regles  :
         self._fenetre.blit(self.l5.textSurf, self.l5.rect)
         self._fenetre.blit(self.l6.textSurf, self.l6.rect)
         self._fenetre.blit(self.l7.textSurf, self.l7.rect)
-        '''for event in events :
-            if event.type == self._CLIGNOTER :
-                self.creerTexte()
-                break'''
 
     def detruire(self) :
             pygame.time.set_timer(self._CLIGNOTER, 0) # désactivation du timer
@@ -261,6 +258,7 @@ class Application :
     def regles(self):
         #Affichage des règles
         self._initialiser()
+        print("TABERNAK")
         self.ecran = Regles(self, self.les_sprites)
         #pygame.init()
         #self.ecran = pygame.display.set_mode((surfaceW,surfaceH))
