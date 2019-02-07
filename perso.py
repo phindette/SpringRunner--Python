@@ -28,6 +28,7 @@ class Perso(pygame.sprite.Sprite):
         self.check = None
         self.gravite = False
         self.changeM = False
+        self.zeroGrav = False
 
     def charger_images(self):
         #charger les images (pour l'instant que l'image de base)
@@ -97,7 +98,8 @@ class Perso(pygame.sprite.Sprite):
             self.changeM = False
             self.acc = vec(0,0.80)
         if keys[pygame.K_e]:
-            self.acc = vec(0,-0.8)
+            if self.zeroGrav:
+                self.acc = vec(0,-0.8)
         if self.changeM:
             if keys[pygame.K_z]:
                 self.pos.y = self.pos.y -2
